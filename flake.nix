@@ -8,6 +8,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -26,6 +31,7 @@
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
+              sharedModules = [ inputs.nvf.homeManagerModules.default ];
               useGlobalPkgs = true;
               useUserPackages = true;
               users.${user} =

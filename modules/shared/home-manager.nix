@@ -52,4 +52,36 @@ in
       rebase.autoStash = "true";
     };
   };
+
+  nvf = {
+    enable = true;
+    settings = {
+      vim = {
+        viAlias = false;
+        vimAlias = true;
+        lsp = {
+          enable = true;
+        };
+        theme = {
+          enable = true;
+          name = "catppuccin";
+          style = "mocha";
+        };
+
+        filetree.neo-tree.enable = true;
+
+        languages = {
+          enableTreesitter = true;
+
+          nix.enable = true;
+          go.enable = true;
+          python.enable = true;
+        };
+
+        statusline.lualine.enable = true;
+        telescope.enable = true;
+        autocomplete.nvim-cmp.enable = true;
+      };
+    };
+  };
 }

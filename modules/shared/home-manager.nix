@@ -9,6 +9,7 @@ let
   name = "Agus Supriyatna";
   user = "agus";
   email = "aguzsupriyatna7@gmail.com";
+  profileID = "6c323a8b-4f47-4ee3-a0ea-70720347fc59"; # Gnome terminal profile ID
 in
 {
   direnv = {
@@ -19,18 +20,17 @@ in
 
   zsh = {
     enable = true;
-    plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
-      {
-        name = "powerlevel10k-config";
-        src = lib.cleanSource ./config;
-        file = "p10k.zsh";
-      }
-    ];
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "zsh-autocomplete"
+        "zsh-syntax-highlighting"
+        "zsh-autosuggestions"
+      ];
+      custom = "$HOME/.oh-my-zsh/custom/";
+      theme = "powerlevel10k/powerlevel10k";
+    };
   };
 
   git = {
@@ -47,9 +47,19 @@ in
         editor = "vim";
         autocrlf = "input";
       };
-      commit.gpgsign = "true";
       pull.rebase = "true";
       rebase.autoStash = "true";
+    };
+  };
+
+  gnome-terminal = {
+    enable = true;
+    profile = {
+      "${profileID}" = {
+        default = true;
+        visibleName = "My Terminal Config";
+        font = "Agave Nerd Font 12";
+      };
     };
   };
 
@@ -65,10 +75,14 @@ in
         theme = {
           enable = true;
           name = "catppuccin";
-          style = "mocha";
+          style = "macchiato";
         };
 
         filetree.neo-tree.enable = true;
+
+	binds = {
+          whichKey.enable = true;
+	};
 
         languages = {
           enableTreesitter = true;

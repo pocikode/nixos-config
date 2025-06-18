@@ -19,5 +19,12 @@ in
     stateVersion = "25.05";
   };
 
-  programs = shared-programs // { };
+  dconf = {
+    enable = true;
+    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  };
+
+  programs = shared-programs // {
+    gpg.enable = true;
+  };
 }

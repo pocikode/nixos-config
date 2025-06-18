@@ -14,6 +14,9 @@ with pkgs;
   bat # A cat clone with syntax highlighting and Git integration
   btop # A resource monitor that shows system usage and stats
 
+  # O
+  oh-my-zsh
+
   # T
   tmux # Terminal multiplexer
   tree # Display directory structure in a tree-like format
@@ -32,4 +35,7 @@ with pkgs;
   # Z
   zip # Utility to create and extract ZIP files
   zsh-powerlevel10k # A theme for Zsh that provides a beautiful and informative prompt
+  zsh-completions
+  zsh-syntax-highlighting
+  zsh-autosuggestions
 ]

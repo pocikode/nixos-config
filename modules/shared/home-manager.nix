@@ -22,14 +22,14 @@ in
     enable = true;
     plugins = [
       {
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
       {
-          name = "powerlevel10k-config";
-          src = lib.cleanSource ./config;
-          file = "p10k.zsh";
+        name = "powerlevel10k-config";
+        src = lib.cleanSource ./config;
+        file = "p10k.zsh";
       }
       {
         name = "zsh-autosuggestions";
@@ -94,6 +94,7 @@ in
         vimAlias = true;
         lsp = {
           enable = true;
+          formatOnSave = true;
         };
         theme = {
           enable = true;
@@ -101,11 +102,16 @@ in
           style = "macchiato";
         };
 
-        filetree.neo-tree.enable = true;
+        filetree.neo-tree = {
+          enable = true;
+          setupOpts = {
+            git_status_async = true;
+          };
+        };
 
-	binds = {
+        binds = {
           whichKey.enable = true;
-	};
+        };
 
         languages = {
           enableTreesitter = true;
@@ -113,6 +119,10 @@ in
           nix.enable = true;
           go.enable = true;
           python.enable = true;
+        };
+
+        formatter = {
+          conform-nvim.enable = true;
         };
 
         statusline.lualine.enable = true;

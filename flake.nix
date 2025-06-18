@@ -56,11 +56,14 @@
       };
 
       nixosConfigurations.vbox = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = inputs // {
+          inherit user;
+        };
         modules = [
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
+              sharedModules = [ inputs.nvf.homeManagerModules.default ];
               useGlobalPkgs = true;
               useUserPackages = true;
               users.${user} =

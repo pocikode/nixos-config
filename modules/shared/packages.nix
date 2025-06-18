@@ -34,8 +34,4 @@ with pkgs;
 
   # Z
   zip # Utility to create and extract ZIP files
-  zsh-powerlevel10k # A theme for Zsh that provides a beautiful and informative prompt
-  zsh-completions
-  zsh-syntax-highlighting
-  zsh-autosuggestions
 ]

@@ -15,7 +15,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/shared
   ];
 
   # Bootloader.
@@ -23,7 +22,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos=vbox";
+  networking.hostName = "nixos-vbox";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
@@ -111,7 +110,7 @@
     package = pkgs.nix;
     extraOptions = ''
       experimental-features = nix-command flakes
-    ''
+    '';
   };
 
   # This value determines the NixOS release from which the default

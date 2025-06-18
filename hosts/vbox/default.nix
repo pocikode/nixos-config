@@ -4,8 +4,10 @@
 
 {
   config,
+  lib,
   pkgs,
   inputs,
+  user,
   ...
 }:
 
@@ -13,8 +15,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.default
-    inputs.nvf.homeManagerModules.default
+    ../../modules/shared
   ];
 
   # Bootloader.
@@ -22,21 +23,11 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos=vbox";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Flake
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
@@ -57,9 +48,6 @@
     variant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -68,26 +56,20 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  users.users.agus = {
+  users.users.${user} = {
     isNormalUser = true;
     description = "Agus Supriyatna";
     extraGroups = [
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [ ];
+    shell = pkgs.zsh;
   };
+
+  # Shell
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -95,45 +77,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # Fonts
-    nerd-fonts.agave
-
-    # Tools
     vim
     git
-    wget
-    curl
-    htop
-    unzip
-    gnupg
-    lf
-    openssl
-
-    # Shell
-    zsh
-    tmux
-    tree
-    fzf
-
-    # GUI
-    firefox-devedition
-
-    # Network and testing tools
-    httpie
-    jq
-    ripgrep
-    lazygit
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
+  # Fonts
+  fonts.packages = import ../../modules/shared/fonts.nix { inherit pkgs; };
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -148,18 +97,22 @@
     };
   };
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "agus" = import ./home.nix;
+  # Configure Nix settings for flakes and Cachix
+  nix = {
+    nixPath = [
+      "nixos-config=/home/${user}/.config/nixos-config:/etc/nixos"
+    ];
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
+    package = pkgs.nix;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    ''
   };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -168,5 +121,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }

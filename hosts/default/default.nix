@@ -20,7 +20,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-0d3f22e4-43b9-4153-935b-8734d8612563".device = "/dev/disk/by-uuid/0d3f22e4-43b9-4153-935b-8734d8612563";
+  boot.initrd.luks.devices."luks-0d3f22e4-43b9-4153-935b-8734d8612563".device =
+    "/dev/disk/by-uuid/0d3f22e4-43b9-4153-935b-8734d8612563";
 
   networking.hostName = "pocikode";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -77,8 +78,14 @@
   # Shell
   programs.zsh.enable = true;
 
+  # enabling unpatched dynamic binaries to run on NixOS
+  programs.nix-ld.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Enable power management
+  powerManagement.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

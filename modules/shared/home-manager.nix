@@ -131,4 +131,9 @@ in
       };
     };
   };
+
+  vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
+  };
 }

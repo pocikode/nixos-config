@@ -9,10 +9,13 @@ with pkgs;
   aspellDicts.en # English dictionary for aspell
   aspellDicts.id # Indonesian dictionary for aspell
 
-  #B
+  # B
   bash-completion # Bash completion scripts
   bat # A cat clone with syntax highlighting and Git integration
   btop # A resource monitor that shows system usage and stats
+
+  # N
+  nixfmt-rfc-style
 
   # O
   oh-my-zsh

@@ -31,6 +31,8 @@ in
       else
         ../../user/wm/none.nix
     )
+
+    ../../user/app/browser/chome.nix
   ];
 
   home = {
@@ -44,4 +46,6 @@ in
   programs = shared-programs // {
     gpg.enable = true;
   };
+
+  xdg.enable = true;
 }

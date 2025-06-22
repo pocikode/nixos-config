@@ -16,6 +16,18 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    # Load DE or WM configuration system-wide.
+    (
+      if userSettings.useGnome then
+        ../../system/wm/gnome.nix
+      else if userSettings.usePlasma then
+        ../../system/wm/plasma.nix
+      else if userSettings.useHyprland then
+        ../../system/wm/hyprland.nix
+      else
+        ../../system/wm/none.nix
+    )
   ];
 
   # Bootloader.
@@ -35,19 +47,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

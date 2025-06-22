@@ -6,9 +6,6 @@
   ...
 }:
 
-let
-  profileID = "6c323a8b-4f47-4ee3-a0ea-70720347fc59"; # Gnome terminal profile ID
-in
 {
   direnv = {
     enable = true;
@@ -70,17 +67,6 @@ in
       };
       pull.rebase = "true";
       rebase.autoStash = "true";
-    };
-  };
-
-  gnome-terminal = {
-    enable = true;
-    profile = {
-      "${profileID}" = {
-        default = true;
-        visibleName = "My Terminal Config";
-        font = "Agave Nerd Font 12";
-      };
     };
   };
 

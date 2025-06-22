@@ -19,22 +19,26 @@ let
   };
 in
 {
+  imports = [
+    # Load DE or WM configuration user-wide.
+    (
+      if userSettings.useGnome then
+        ../../user/wm/gnome.nix
+      else if userSettings.usePlasma then
+        ../../user/wm/plasma.nix
+      else if userSettings.useHyprland then
+        ../../user/wm/hyprland.nix
+      else
+        ../../user/wm/none.nix
+    )
+  ];
+
   home = {
     username = "${userSettings.username}";
     homeDirectory = "/home/${userSettings.username}";
     enableNixpkgsReleaseCheck = false;
     packages = pkgs.callPackage ./packages.nix { inherit inputs; };
     stateVersion = "25.05";
-  };
-
-  dconf = {
-    enable = true;
-
-    settings = {
-      "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-      "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-timeout = 300;
-      "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type = "blank";
-    };
   };
 
   programs = shared-programs // {

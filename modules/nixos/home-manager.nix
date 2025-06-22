@@ -3,11 +3,11 @@
   pkgs,
   lib,
   inputs,
+  user,
   ...
 }:
 
 let
-  user = "agus";
   shared-programs = import ../shared/home-manager.nix { inherit config pkgs lib; };
 in
 {

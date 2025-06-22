@@ -23,100 +23,39 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-        specialArgs = inputs // {
-          inherit user;
+      nixosConfigurations = {
+        default = nixpkgs.lib.nixosSystem {
+          specialArgs = inputs // {
+            inherit user;
+          };
+          modules = [
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                sharedModules = [ inputs.nvf.homeManagerModules.default ];
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${user} =
+                  {
+                    config,
+                    pkgs,
+                    lib,
+                    ...
+                  }:
+                  import ./modules/nixos/home-manager.nix {
+                    inherit
+                      config
+                      pkgs
+                      lib
+                      inputs
+                      user
+                      ;
+                  };
+              };
+            }
+            ./hosts/workstation
+          ];
         };
-        modules = [
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              sharedModules = [ inputs.nvf.homeManagerModules.default ];
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${user} =
-                {
-                  config,
-                  pkgs,
-                  lib,
-                  ...
-                }:
-                import ./modules/nixos/home-manager.nix {
-                  inherit
-                    config
-                    pkgs
-                    lib
-                    inputs
-                    ;
-                };
-            };
-          }
-          ./hosts/default
-        ];
-      };
-
-      nixosConfigurations.qemu = nixpkgs.lib.nixosSystem {
-        specialArgs = inputs // {
-          inherit user;
-        };
-        modules = [
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              sharedModules = [ inputs.nvf.homeManagerModules.default ];
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${user} =
-                {
-                  config,
-                  pkgs,
-                  lib,
-                  ...
-                }:
-                import ./modules/nixos/home-manager.nix {
-                  inherit
-                    config
-                    pkgs
-                    lib
-                    inputs
-                    ;
-                };
-            };
-          }
-          ./hosts/qemu
-        ];
-      };
-
-      nixosConfigurations.vbox = nixpkgs.lib.nixosSystem {
-        specialArgs = inputs // {
-          inherit user;
-        };
-        modules = [
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              sharedModules = [ inputs.nvf.homeManagerModules.default ];
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${user} =
-                {
-                  config,
-                  pkgs,
-                  lib,
-                  ...
-                }:
-                import ./modules/nixos/home-manager.nix {
-                  inherit
-                    config
-                    pkgs
-                    lib
-                    inputs
-                    ;
-                };
-            };
-          }
-          ./hosts/vbox
-        ];
       };
     };
 }

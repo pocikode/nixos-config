@@ -16,6 +16,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../system/container/podman.nix
 
     # Load DE or WM configuration system-wide.
     (

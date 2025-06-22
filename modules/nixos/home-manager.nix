@@ -41,6 +41,10 @@ in
     enableNixpkgsReleaseCheck = false;
     packages = pkgs.callPackage ./packages.nix { inherit inputs; };
     stateVersion = "25.05";
+
+    file = {
+      "container-services/compose.yaml".source = ../../user/container/compose.services.yaml;
+    };
   };
 
   programs = shared-programs // {

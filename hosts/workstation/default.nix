@@ -7,7 +7,8 @@
   lib,
   pkgs,
   inputs,
-  user,
+  systemSettings,
+  userSettings,
   ...
 }:
 
@@ -23,14 +24,14 @@
   boot.initrd.luks.devices."luks-0d3f22e4-43b9-4153-935b-8734d8612563".device =
     "/dev/disk/by-uuid/0d3f22e4-43b9-4153-935b-8734d8612563";
 
-  networking.hostName = "pocikode";
+  networking.hostName = systemSettings.hostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Asia/Jakarta";
+  time.timeZone = systemSettings.timezone;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -65,9 +66,9 @@
   services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user} = {
+  users.users.${userSettings.username} = {
     isNormalUser = true;
-    description = "Agus Supriyatna";
+    description = userSettings.name;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -113,7 +114,7 @@
   # Configure Nix settings for flakes and Cachix
   nix = {
     nixPath = [
-      "nixos-config=/home/${user}/.config/nixos-config:/etc/nixos"
+      "nixos-config=/home/${userSettings.username}/.config/nixos-config:/etc/nixos"
     ];
     settings = {
       experimental-features = [

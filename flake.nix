@@ -18,15 +18,28 @@
   outputs =
     { self, nixpkgs, ... }@inputs:
     let
-      user = "agus";
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+
+      systemSettings = rec {
+        hostname = "pocikode";
+        timezone = "Asia/Jakarta";
+      };
+
+      userSettings = rec {
+        username = "agus";
+        name = "Agus Supriyatna";
+        email = "aguzsupriyatna7@gmail.com";
+        useGnome = true;
+        usePlasma = false;
+        useHyprland = false;
+      };
     in
     {
       nixosConfigurations = {
         default = nixpkgs.lib.nixosSystem {
           specialArgs = inputs // {
-            inherit user;
+            inherit systemSettings userSettings;
           };
           modules = [
             inputs.home-manager.nixosModules.home-manager
@@ -35,7 +48,7 @@
                 sharedModules = [ inputs.nvf.homeManagerModules.default ];
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.${user} =
+                users.${userSettings.username} =
                   {
                     config,
                     pkgs,
@@ -48,7 +61,8 @@
                       pkgs
                       lib
                       inputs
-                      user
+                      systemSettings
+                      userSettings
                       ;
                   };
               };

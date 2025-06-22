@@ -2,13 +2,11 @@
   config,
   pkgs,
   lib,
+  userSettings,
   ...
 }:
 
 let
-  name = "Agus Supriyatna";
-  user = "agus";
-  email = "aguzsupriyatna7@gmail.com";
   profileID = "6c323a8b-4f47-4ee3-a0ea-70720347fc59"; # Gnome terminal profile ID
 in
 {
@@ -59,8 +57,8 @@ in
   git = {
     enable = true;
     ignores = [ "*.swp" ];
-    userName = name;
-    userEmail = email;
+    userName = userSettings.name;
+    userEmail = userSettings.email;
     lfs = {
       enable = true;
     };

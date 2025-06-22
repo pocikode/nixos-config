@@ -3,17 +3,25 @@
   pkgs,
   lib,
   inputs,
-  user,
+  systemSettings,
+  userSettings,
   ...
 }:
 
 let
-  shared-programs = import ../shared/home-manager.nix { inherit config pkgs lib; };
+  shared-programs = import ../shared/home-manager.nix {
+    inherit
+      config
+      pkgs
+      lib
+      userSettings
+      ;
+  };
 in
 {
   home = {
-    username = "${user}";
-    homeDirectory = "/home/${user}";
+    username = "${userSettings.username}";
+    homeDirectory = "/home/${userSettings.username}";
     enableNixpkgsReleaseCheck = false;
     packages = pkgs.callPackage ./packages.nix { inherit inputs; };
     stateVersion = "25.05";

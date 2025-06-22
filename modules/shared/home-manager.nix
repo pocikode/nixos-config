@@ -67,6 +67,7 @@
       };
       pull.rebase = "true";
       rebase.autoStash = "true";
+      credential.helper = "cache --timeout=3600";
     };
   };
 

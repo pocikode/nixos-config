@@ -148,11 +148,28 @@
         "type": "github"
       }
     },
+    "python38": {
+      "locked": {
+        "lastModified": 1600756706,
+        "narHash": "sha256-er5nJMIhpTaC7jv9KLuedVNttXvvUC28s2Rrhgd596Y=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "83162ab3b97d0e13b08e28938133381a7515c1e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "83162ab3b97d0e13b08e28938133381a7515c1e3",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nvf": "nvf"
+        "nvf": "nvf",
+        "python38": "python38"
       }
     },
     "systems": {

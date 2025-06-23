@@ -15,6 +15,10 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.nixpkgs.follows = "hyprland";
+    };
 
     python38.url = "github:nixos/nixpkgs/83162ab3b97d0e13b08e28938133381a7515c1e3";
     go_1_19.url = "github:nixos/nixpkgs/160b762eda6d139ac10ae081f8f78d640dd523eb";
@@ -126,7 +130,10 @@
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager = {
-                sharedModules = [ inputs.nvf.homeManagerModules.default ];
+                sharedModules = [
+                  inputs.nvf.homeManagerModules.default
+                ];
+                extraSpecialArgs = { inherit inputs; };
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.${userSettings.username} =
@@ -134,6 +141,7 @@
                     config,
                     pkgs,
                     lib,
+                    inputs,
                     ...
                   }:
                   import ./modules/nixos/home-manager.nix {

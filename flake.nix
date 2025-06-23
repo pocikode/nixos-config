@@ -112,5 +112,40 @@
           ];
         };
       };
+
+      vbox = nixpkgs.lib.nixosSystem {
+        specialArgs = inputs // {
+          inherit systemSettings userSettings;
+        };
+        modules = [
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              sharedModules = [ inputs.nvf.homeManagerModules.default ];
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${userSettings.username} =
+                {
+                  config,
+                  pkgs,
+                  lib,
+                  ...
+                }:
+                import ./modules/nixos/home-manager.nix {
+                  inherit
+                    config
+                    pkgs
+                    lib
+                    inputs
+                    systemSettings
+                    userSettings
+                    ;
+                };
+            };
+          }
+          ./hosts/vbox
+        ];
+      };
+
     };
 }

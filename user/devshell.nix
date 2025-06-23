@@ -1,4 +1,10 @@
-{ pkgs, python38, ... }:
+{
+  pkgs,
+  python38,
+  go_1_19,
+  go_1_22,
+  ...
+}:
 
 let
   base = [
@@ -26,6 +32,26 @@ in
     ];
     shellHook = ''
       echo "Welcome to Python 3.8 development shell!" | cowsay | lolcat
+    '';
+  };
+
+  go_1_19 = pkgs.mkShell {
+    name = "go-1.19-devshell";
+    nativeBuildInputs = base ++ [
+      go_1_19.go_1_19
+    ];
+    shellHook = ''
+      echo "Welcome to Go 1.19 development shell!" | cowsay | lolcat
+    '';
+  };
+
+  go_1_22 = pkgs.mkShell {
+    name = "go-1.22-devshell";
+    nativeBuildInputs = base ++ [
+      go_1_22.go_1_22
+    ];
+    shellHook = ''
+      echo "Welcome to Go 1.22 development shell!" | cowsay | lolcat
     '';
   };
 

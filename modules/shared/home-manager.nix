@@ -9,6 +9,7 @@
 {
   direnv = {
     enable = true;
+    enableBashIntegration = false;
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
@@ -48,6 +49,9 @@
       alias cat="$(which bat)"
       export MANPAGER="sh -c 'col -bx | bat -l man -p'"
       export MANROFFOPT="-c"
+
+      # direnv
+      eval "$(direnv hook zsh)"
     '';
   };
 
@@ -87,10 +91,26 @@
           style = "macchiato";
         };
 
+        keymaps = [
+          {
+            key = "<leader>gt";
+            mode = [ "n" ];
+            action = ":ToggleTerm<CR>";
+            silent = true;
+          }
+        ];
+
         filetree.neo-tree = {
           enable = true;
           setupOpts = {
             git_status_async = true;
+          };
+        };
+
+        terminal = {
+          toggleterm = {
+            enable = true;
+            lazygit.enable = true;
           };
         };
 
@@ -100,7 +120,6 @@
 
         languages = {
           enableTreesitter = true;
-
           nix.enable = true;
           go.enable = true;
           python.enable = true;

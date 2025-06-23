@@ -25,7 +25,7 @@ in
       "${profileID}" = {
         default = true;
         visibleName = "My Terminal Config";
-        font = "Agave Nerd Font 12";
+        font = "Agave Nerd Font 11";
       };
     };
   };

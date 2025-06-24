@@ -12,265 +12,189 @@ let
 in
 {
   home.packages = with pkgs; [
+    waybar
+    eww
+    mako # notification daemon
+    libnotify
     alacritty
     kitty
+    swww # wallpaper manager
+    fuzzel # application launcher
+    ranger # file manager
+    wl-clipboard
   ];
-
-  programs.waybar = {
-    enable = true;
-    settings = {
-      mainBar = {
-        layer = "top";
-        position = "top";
-        height = 35;
-        margin = "7 7 3 7";
-        spacing = 2;
-
-        modules-left = [
-          "group/power"
-          "group/battery"
-          "group/backlight"
-          "group/cpu"
-          "group/memory"
-          "group/pulseaudio"
-          "keyboard-state"
-        ];
-        modules-center = [
-          "custom/hyprprofile"
-          "hyprland/workspaces"
-        ];
-        modules-right = [
-          "group/time"
-          "idle_inhibitor"
-          "tray"
-        ];
-      };
-    };
-  };
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = hyprland;
     systemd.enable = true;
-    xwayland.enable = true;
     settings = {
+      "$fileManager" = "$terminal -e sh -c ranger";
+      "$mainMod" = "SUPER";
+      "$menu" = "fuzzel";
+      "$terminal" = "kitty";
+      monitor = ",1920x1080@60,auto,1";
+
+      env = [
+        "NIXOS_OZONE_WL,1"
+        "XDG_CURRENT_DESKTOP,Hyprland"
+        "XDG_SESSION_TYPE,wayland"
+        "XDG_SESSION_DESKTOP,Hyprland"
+        "QT_QPA_PLATFORM,wayland"
+        "XDG_SCREENSHOTS_DIR,$HOME/screens"
+      ];
+
       exec-once = [
-        "ags -b hypr"
-        "hyprctl setcursor Qogir 24"
-        "transmission-gtk"
+        "waybar"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
       ];
 
-      monitor = [
-        ",preferred,auto,1"
-      ];
-
-      general = {
-        layout = "dwindle";
-        resize_on_border = true;
-      };
-
-      misc = {
-        layers_hog_keyboard_focus = false;
-        disable_splash_rendering = true;
-        force_default_wallpaper = 0;
-      };
-
-      input = {
-        kb_layout = "hu";
-        kb_model = "pc104";
-        follow_mouse = 1;
-        touchpad = {
-          natural_scroll = "yes";
-          disable_while_typing = true;
-          drag_lock = true;
+      decoration = {
+        blur = {
+          enabled = true;
+          passes = 1;
+          size = 3;
+          vibrancy = 0.1696;
         };
-        sensitivity = 0;
-        float_switch_override_focus = 2;
-      };
 
-      binds = {
-        allow_workspace_cycles = true;
+        shadow = {
+          color = "rgba(1a1a1aee)";
+          enabled = true;
+          range = 4;
+          render_power = 3;
+        };
+
+        active_opacity = 1.0;
+        inactive_opacity = 0.9;
+        rounding = 10;
       };
 
       dwindle = {
-        pseudotile = "yes";
-        preserve_split = "yes";
-        # no_gaps_when_only = "yes";
+        preserve_split = true;
+        pseudotitle = true;
+      };
+
+      general = {
+        allow_tearing = false;
+        border_size = 5;
+        "col.active_border" = "rgba(d65d0eff) rgba(98971aff) 45deg";
+        "col.inactive_border" = "rgba(3c3836ff)";
+        gaps_in = 5;
+        gaps_out = 20;
+        layout = "master";
+        resize_on_border = true;
       };
 
       gestures = {
         workspace_swipe = true;
         workspace_swipe_forever = true;
-        workspace_swipe_numbered = true;
+        workspace_swipe_inverted = false;
       };
 
-      windowrule =
-        let
-          f = regex: "float, ^(${regex})$";
-        in
-        [
-          (f "org.gnome.Calculator")
-          (f "org.gnome.Nautilus")
-          (f "pavucontrol")
-          (f "nm-connection-editor")
-          (f "blueberry.py")
-          (f "org.gnome.Settings")
-          (f "org.gnome.design.Palette")
-          (f "Color Picker")
-          (f "xdg-desktop-portal")
-          (f "xdg-desktop-portal-gnome")
-          (f "transmission-gtk")
-          (f "com.github.Aylur.ags")
-          "workspace 7, title:Spotify"
-        ];
+      input = {
+        kb_layout = "us";
+        kb_options = "grp:caps_toggle";
+      };
 
-      bind =
-        let
-          binding =
-            mod: cmd: key: arg:
-            "${mod}, ${key}, ${cmd}, ${arg}";
-          mvfocus = binding "SUPER" "movefocus";
-          ws = binding "SUPER" "workspace";
-          resizeactive = binding "SUPER CTRL" "resizeactive";
-          mvactive = binding "SUPER ALT" "moveactive";
-          mvtows = binding "SUPER SHIFT" "movetoworkspace";
-          e = "exec, ags -b hypr";
-          arr = [
-            1
-            2
-            3
-            4
-            5
-            6
-            7
-            8
-            9
-          ];
-          yt = pkgs.writeShellScriptBin "yt" ''
-            notify-send "Opening video" "$(wl-paste)"
-            mpv "$(wl-paste)"
-          '';
-        in
-        [
-          "CTRL SHIFT, R,  ${e} quit; ags -b hypr"
-          "SUPER, R,       ${e} -t applauncher"
-          ", XF86PowerOff, ${e} -t powermenu"
-          "SUPER, Tab,     ${e} -t overview"
-          ", XF86Launch4,  ${e} -r 'recorder.start()'"
-          ",Print,         ${e} -r 'recorder.screenshot()'"
-          "SHIFT,Print,    ${e} -r 'recorder.screenshot(true)'"
-          "SUPER, Return, exec, xterm" # xterm is a symlink, not actually xterm
-          "SUPER, W, exec, firefox"
-          "SUPER, E, exec, wezterm -e lf"
+      master = {
+        mfact = 0.5;
+        new_on_top = "true";
+        new_statue = "slave";
+      };
 
-          # youtube
-          ", XF86Launch1,  exec, ${yt}/bin/yt"
+      misc = {
+        disable_hyprland_logo = true;
+        force_default_wallpaper = 0;
+      };
 
-          "ALT, Tab, focuscurrentorlast"
-          "CTRL ALT, Delete, exit"
-          "ALT, Q, killactive"
-          "SUPER, F, togglefloating"
-          "SUPER, G, fullscreen"
-          "SUPER, O, fakefullscreen"
-          "SUPER, P, togglesplit"
+      bind = [
+        "$mainMod SHIFT, Return, exec, $terminal"
+        "$mainMod SHIFT, C, killactive,"
+        "$mainMod SHIFT, Q, exit,"
+        "$mainMod,       R, exec, $fileManager"
+        "$mainMod,       F, togglefloating,"
+        "$mainMod,       D, exec, $menu --show drun"
+        "$mainMod,       P, pin,"
+        "$mainMod,       J, togglesplit,"
+        "$mainMod,       E, exec, bemoji -cn"
+        "$mainMod,       V, exec, cliphist list | $menu --dmenu | cliphist decode | wl-copy"
+        "$mainMod,       B, exec, pkill -SIGUSR2 waybar"
+        "$mainMod SHIFT, B, exec, pkill -SIGUSR1 waybar"
+        "$mainMod,       L, exec, loginctl lock-session"
+        "$mainMod,       P, exec, hyprpicker -an"
+        "$mainMod,       N, exec, swaync-client -t"
+        ", Print, exec, grimblast --notify --freeze copysave area"
 
-          (mvfocus "k" "u")
-          (mvfocus "j" "d")
-          (mvfocus "l" "r")
-          (mvfocus "h" "l")
-          (ws "left" "e-1")
-          (ws "right" "e+1")
-          (mvtows "left" "e-1")
-          (mvtows "right" "e+1")
-          (resizeactive "k" "0 -20")
-          (resizeactive "j" "0 20")
-          (resizeactive "l" "20 0")
-          (resizeactive "h" "-20 0")
-          (mvactive "k" "0 -20")
-          (mvactive "j" "0 20")
-          (mvactive "l" "20 0")
-          (mvactive "h" "-20 0")
-        ]
-        ++ (map (i: ws (toString i) (toString i)) arr)
-        ++ (map (i: mvtows (toString i) (toString i)) arr);
+        # Moving focus
+        "$mainMod, left, movefocus, l"
+        "$mainMod, right, movefocus, r"
+        "$mainMod, up, movefocus, u"
+        "$mainMod, down, movefocus, d"
 
-      bindle =
-        let
-          e = "exec, ags -b hypr -r";
-        in
-        [
-          ",XF86MonBrightnessUp,   ${e} 'brightness.screen += 0.05; indicator.display()'"
-          ",XF86MonBrightnessDown, ${e} 'brightness.screen -= 0.05; indicator.display()'"
-          ",XF86KbdBrightnessUp,   ${e} 'brightness.kbd++; indicator.kbd()'"
-          ",XF86KbdBrightnessDown, ${e} 'brightness.kbd--; indicator.kbd()'"
-          ",XF86AudioRaiseVolume,  ${e} 'audio.speaker.volume += 0.05; indicator.speaker()'"
-          ",XF86AudioLowerVolume,  ${e} 'audio.speaker.volume -= 0.05; indicator.speaker()'"
-        ];
+        # Moving windows
+        "$mainMod SHIFT, left,  swapwindow, l"
+        "$mainMod SHIFT, right, swapwindow, r"
+        "$mainMod SHIFT, up,    swapwindow, u"
+        "$mainMod SHIFT, down,  swapwindow, d"
 
-      bindl =
-        let
-          e = "exec, ags -b hypr -r";
-        in
-        [
-          ",XF86AudioPlay,    ${e} 'mpris?.playPause()'"
-          ",XF86AudioStop,    ${e} 'mpris?.stop()'"
-          ",XF86AudioPause,   ${e} 'mpris?.pause()'"
-          ",XF86AudioPrev,    ${e} 'mpris?.previous()'"
-          ",XF86AudioNext,    ${e} 'mpris?.next()'"
-          ",XF86AudioMicMute, ${e} 'audio.microphone.isMuted = !audio.microphone.isMuted'"
-        ];
+        # Resizeing windows                   X  Y
+        "$mainMod CTRL, left,  resizeactive, -60 0"
+        "$mainMod CTRL, right, resizeactive,  60 0"
+        "$mainMod CTRL, up,    resizeactive,  0 -60"
+        "$mainMod CTRL, down,  resizeactive,  0  60"
 
-      bindm = [
-        "SUPER, mouse:273, resizewindow"
-        "SUPER, mouse:272, movewindow"
+        # Switching workspaces
+        "$mainMod, 1, workspace, 1"
+        "$mainMod, 2, workspace, 2"
+        "$mainMod, 3, workspace, 3"
+        "$mainMod, 4, workspace, 4"
+        "$mainMod, 5, workspace, 5"
+        "$mainMod, 6, workspace, 6"
+        "$mainMod, 7, workspace, 7"
+        "$mainMod, 8, workspace, 8"
+        "$mainMod, 9, workspace, 9"
+        "$mainMod, 0, workspace, 10"
+
+        # Moving windows to workspaces
+        "$mainMod SHIFT, 1, movetoworkspacesilent, 1"
+        "$mainMod SHIFT, 2, movetoworkspacesilent, 2"
+        "$mainMod SHIFT, 3, movetoworkspacesilent, 3"
+        "$mainMod SHIFT, 4, movetoworkspacesilent, 4"
+        "$mainMod SHIFT, 5, movetoworkspacesilent, 5"
+        "$mainMod SHIFT, 6, movetoworkspacesilent, 6"
+        "$mainMod SHIFT, 7, movetoworkspacesilent, 7"
+        "$mainMod SHIFT, 8, movetoworkspacesilent, 8"
+        "$mainMod SHIFT, 9, movetoworkspacesilent, 9"
+        "$mainMod SHIFT, 0, movetoworkspacesilent, 10"
+
+        # Scratchpad
+        "$mainMod,       S, togglespecialworkspace,  magic"
+        "$mainMod SHIFT, S, movetoworkspace, special:magic"
       ];
 
-      decoration = {
-        drop_shadow = "yes";
-        shadow_range = 8;
-        shadow_render_power = 2;
-        "col.shadow" = "rgba(00000044)";
+      # Move/resize windows with mainMod + LMB/RMB and dragging
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
+      ];
 
-        dim_inactive = false;
+      # Laptop multimedia keys for volume and LCD brightness
+      bindel = [
+        ",XF86AudioRaiseVolume,  exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume,  exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86AudioMute,         exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute,      exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        "$mainMod, bracketright, exec, brightnessctl s 10%+"
+        "$mainMod, bracketleft,  exec, brightnessctl s 10%-"
+      ];
 
-        blur = {
-          enabled = true;
-          size = 8;
-          passes = 3;
-          new_optimizations = "on";
-          noise = 0.01;
-          contrast = 0.9;
-          brightness = 0.8;
-        };
-      };
-
-      animations = {
-        enabled = "yes";
-        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-        animation = [
-          "windows, 1, 5, myBezier"
-          "windowsOut, 1, 7, default, popin 80%"
-          "border, 1, 10, default"
-          "fade, 1, 7, default"
-          "workspaces, 1, 6, default"
-        ];
-      };
-
-      plugin = {
-        hyprbars = {
-          bar_color = "rgb(2a2a2a)";
-          bar_height = 28;
-          col_text = "rgba(ffffffdd)";
-          bar_text_size = 11;
-          bar_text_font = "Ubuntu Nerd Font";
-
-          buttons = {
-            button_size = 0;
-            "col.maximize" = "rgba(ffffff11)";
-            "col.close" = "rgba(ff111133)";
-          };
-        };
-      };
+      # Audio playback
+      bindl = [
+        ", XF86AudioNext,  exec, playerctl next"
+        ", XF86AudioPause, exec, playerctl play-pause"
+        ", XF86AudioPlay,  exec, playerctl play-pause"
+        ", XF86AudioPrev,  exec, playerctl previous"
+      ];
 
     };
   };

@@ -34,6 +34,8 @@ in
 
     ../../user/app/browser/chome.nix
     ../../user/app/terminal/kitty.nix
+
+    ../home-manager/cli-apps.nix
   ];
 
   home = {

@@ -63,7 +63,7 @@
           python38 = inputs.python38.legacyPackages.${system};
           go_1_19 = inputs.go_1_19.legacyPackages.${system};
           go_1_22 = inputs.go_1_22.legacyPackages.${system};
-          devShellSrc = import ./user/devshell.nix {
+          devShellSrc = import ./modules/devshell.nix {
             inherit
               pkgs
               python38
@@ -210,6 +210,20 @@
           ];
         };
 
+      };
+
+      homeConfigurations = {
+        default = inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            inputs.nvf.homeManagerModules.default
+            ./hosts/workstation/home.nix
+            ./modules/home-manager
+          ];
+          extraSpecialArgs = {
+            inherit inputs systemSettings userSettings;
+          };
+        };
       };
     };
 }

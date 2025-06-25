@@ -92,10 +92,17 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
-    git
-    openvpn
+    btop
     evillimiter
+    git
+    home-manager
+    openvpn
+    tree
+    unzip
+    unrar
+    vim
+    wget
+    zsh
   ];
 
   # Fonts

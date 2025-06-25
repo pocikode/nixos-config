@@ -31,21 +31,6 @@ in
       else
         ../../user/wm/none.nix
     )
-
-    ../../user/app/browser/chome.nix
-    ../../user/app/terminal/kitty.nix
-
-    # ../home-manager/shell/default.nix
-    (import ../home-manager/shell {
-      inherit
-        config
-        pkgs
-        lib
-        userSettings
-        ;
-    })
-
-    ../home-manager/cli-apps.nix
   ];
 
   home = {

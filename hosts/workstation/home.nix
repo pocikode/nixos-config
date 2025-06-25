@@ -45,7 +45,8 @@
 
   xdg.enable = true;
 
-  gnome_module.enable = userSettings.useGnome;
+  # enable gnome settings
+  gnome_module.enable = true;
 
   programs.home-manager.enable = true;
   programs.gpg.enable = true;

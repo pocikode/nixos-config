@@ -16,17 +16,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-
-    (
-      if userSettings.useGnome then
-        ../../system/wm/gnome.nix
-      else if userSettings.usePlasma then
-        ../../system/wm/plasma.nix
-      else if userSettings.useHyprland then
-        ../../system/wm/hyprland.nix
-      else
-        ../../system/wm/none.nix
-    )
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -47,6 +36,13 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+
+  # Enable GNOME desktop environment.
+  hyprland_wm.enable = true;
+
+  # Enable the OpenSSH daemon.
+  openssh.enable = true;
+
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -77,14 +73,8 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${userSettings.username} = {
     isNormalUser = true;
+    description = userSettings.name;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      tree
-      curl
-      wget
-      git
-      vim
-    ];
     shell = pkgs.zsh;
   };
 
@@ -122,9 +112,6 @@
   # };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

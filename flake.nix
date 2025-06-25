@@ -89,127 +89,30 @@
             inherit systemSettings userSettings;
           };
           modules = [
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                sharedModules = [ inputs.nvf.homeManagerModules.default ];
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${userSettings.username} =
-                  {
-                    config,
-                    pkgs,
-                    lib,
-                    ...
-                  }:
-                  import ./modules/nixos/home-manager.nix {
-                    inherit
-                      config
-                      pkgs
-                      lib
-                      inputs
-                      systemSettings
-                      userSettings
-                      ;
-                  };
-              };
-            }
             ./hosts/workstation
+            ./modules/nixos
           ];
         };
 
         vbox = nixpkgs.lib.nixosSystem {
           specialArgs = inputs // {
-            inherit systemSettings;
-            userSettings = userSettings // {
-              useGnome = false;
-              useHyprland = true;
-            };
+            inherit systemSettings userSettings;
           };
           modules = [
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                sharedModules = [
-                  inputs.nvf.homeManagerModules.default
-                ];
-                extraSpecialArgs = { inherit inputs; };
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${userSettings.username} =
-                  {
-                    config,
-                    pkgs,
-                    lib,
-                    inputs,
-                    ...
-                  }:
-                  import ./modules/nixos/home-manager.nix {
-                    inherit
-                      config
-                      pkgs
-                      lib
-                      inputs
-                      systemSettings
-                      ;
-                    userSettings = userSettings // {
-                      useGnome = false;
-                      useHyprland = true;
-                    };
-                  };
-
-              };
-            }
             ./hosts/vbox
+            ./modules/nixos
           ];
         };
 
         qemu = nixpkgs.lib.nixosSystem {
           specialArgs = inputs // {
-            inherit systemSettings;
-            userSettings = userSettings // {
-              useGnome = false;
-              useHyprland = true;
-            };
+            inherit systemSettings userSettings;
           };
           modules = [
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                sharedModules = [
-                  inputs.nvf.homeManagerModules.default
-                ];
-                extraSpecialArgs = { inherit inputs; };
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${userSettings.username} =
-                  {
-                    config,
-                    pkgs,
-                    lib,
-                    inputs,
-                    ...
-                  }:
-                  import ./modules/nixos/home-manager.nix {
-                    inherit
-                      config
-                      pkgs
-                      lib
-                      inputs
-                      systemSettings
-                      ;
-                    userSettings = userSettings // {
-                      useGnome = false;
-                      useHyprland = true;
-                    };
-                  };
-
-              };
-            }
             ./hosts/qemu
+            ./modules/nixos
           ];
         };
-
       };
 
       homeConfigurations = {

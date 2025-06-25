@@ -16,20 +16,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../system/container/docker.nix
-    ../../system/virtualisation/virt.nix
-
-    # Load DE or WM configuration system-wide.
-    (
-      if userSettings.useGnome then
-        ../../system/wm/gnome.nix
-      else if userSettings.usePlasma then
-        ../../system/wm/plasma.nix
-      else if userSettings.useHyprland then
-        ../../system/wm/hyprland.nix
-      else
-        ../../system/wm/none.nix
-    )
   ];
 
   # Bootloader.
@@ -49,6 +35,18 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+
+  # Enable virtualisation support.
+  virtualisation_support.enable = true;
+
+  # Enable docker
+  docker.enable = true;
+
+  # Enable GNOME desktop environment.
+  gnome_de.enable = true;
+
+  # Enable the OpenSSH daemon.
+  openssh.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -104,22 +102,6 @@
     wget
     zsh
   ];
-
-  # Fonts
-  fonts.packages = import ../../modules/shared/fonts.nix { inherit pkgs; };
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    ports = [ 22 ];
-    settings = {
-      PasswordAuthentication = true;
-      AllowUsers = null;
-      UseDns = true;
-      X11Forwarding = false;
-      PermitRootLogin = "yes";
-    };
-  };
 
   # Configure Nix settings for flakes and Cachix
   nix = {

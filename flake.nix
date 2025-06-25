@@ -164,6 +164,52 @@
           ];
         };
 
+qemu = nixpkgs.lib.nixosSystem {
+          specialArgs = inputs // {
+            inherit systemSettings;
+            userSettings = userSettings // {
+              useGnome = false;
+              useHyprland = true;
+            };
+          };
+          modules = [
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                sharedModules = [
+                  inputs.nvf.homeManagerModules.default
+                ];
+                extraSpecialArgs = { inherit inputs; };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${userSettings.username} =
+                  {
+                    config,
+                    pkgs,
+                    lib,
+                    inputs,
+                    ...
+                  }:
+                  import ./modules/nixos/home-manager.nix {
+                    inherit
+                      config
+                      pkgs
+                      lib
+                      inputs
+                      systemSettings
+                      ;
+                    userSettings = userSettings // {
+                      useGnome = false;
+                      useHyprland = true;
+                    };
+                  };
+
+              };
+            }
+            ./hosts/qemu
+          ];
+        };
+
       };
     };
 }

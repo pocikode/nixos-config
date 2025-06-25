@@ -2,14 +2,22 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, systemSettings, userSettings, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  systemSettings,
+  userSettings,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-(
+    (
       if userSettings.useGnome then
         ../../system/wm/gnome.nix
       else if userSettings.usePlasma then
@@ -19,7 +27,7 @@
       else
         ../../system/wm/none.nix
     )
-    ];
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -28,7 +36,7 @@
   networking.hostName = systemSettings.hostname; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = systemSettings.timezone;
@@ -47,9 +55,6 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-
-
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -75,17 +80,24 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
-	curl
-	wget
-	git
-	vim
+      curl
+      wget
+      git
+      vim
     ];
+    shell = pkgs.zsh;
   };
 
-programs.zsh.enable = true;
-nixpkgs.config.allowUnfree = true;
+  # Shell
+  programs.zsh.enable = true;
 
-# Fonts
+  # enabling unpatched dynamic binaries to run on NixOS
+  programs.nix-ld.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # Fonts
   fonts.packages = import ../../modules/shared/fonts.nix { inherit pkgs; };
 
   # programs.firefox.enable = true;
@@ -95,11 +107,11 @@ nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-	firefox
-	spice-vdagent
+    firefox
+    spice-vdagent
   ];
 
-services.spice-webdavd.enable = true;
+  services.spice-webdavd.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -125,7 +137,7 @@ services.spice-webdavd.enable = true;
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
 
-nix = {
+  nix = {
     nixPath = [
       "nixos-config=/home/${userSettings.username}/.config/nixos-config:/etc/nixos"
     ];
@@ -166,4 +178,3 @@ nix = {
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
-

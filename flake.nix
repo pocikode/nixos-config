@@ -164,7 +164,7 @@
           ];
         };
 
-qemu = nixpkgs.lib.nixosSystem {
+        qemu = nixpkgs.lib.nixosSystem {
           specialArgs = inputs // {
             inherit systemSettings;
             userSettings = userSettings // {

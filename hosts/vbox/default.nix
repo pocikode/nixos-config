@@ -19,10 +19,11 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-0d3f22e4-43b9-4153-935b-8734d8612563".device =
-    "/dev/disk/by-uuid/0d3f22e4-43b9-4153-935b-8734d8612563";
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/sda";
+    useOSProber = true;
+  };
 
   networking.hostName = systemSettings.hostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -36,20 +37,14 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable virtualisation support.
-  virtualisation_support.enable = true;
-
-  # Enable docker
-  docker.enable = true;
-
   # Enable GNOME desktop environment.
-  gnome_de.enable = true;
+  hyprland_wm.enable = true;
 
   # Enable the OpenSSH daemon.
   openssh.enable = true;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -90,17 +85,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    btop
-    evillimiter
-    git
-    home-manager
-    openvpn
-    tree
-    unzip
-    unrar
     vim
-    wget
-    zsh
+    git
   ];
 
   # Configure Nix settings for flakes and Cachix
@@ -113,6 +99,11 @@
         "nix-command"
         "flakes"
       ];
+
+      # Cachix
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
     package = pkgs.nix;
     extraOptions = ''

@@ -96,6 +96,9 @@
     git
     openvpn
     evillimiter
+    libreoffice-fresh
+    hunspell
+    hunspellDicts.id_ID
   ];
 
   # Fonts

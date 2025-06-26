@@ -127,6 +127,18 @@
             inherit inputs systemSettings userSettings;
           };
         };
+
+        qemu = inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            inputs.nvf.homeManagerModules.default
+            ./hosts/qemu/home.nix
+            ./modules/home-manager
+          ];
+          extraSpecialArgs = {
+            inherit inputs systemSettings userSettings;
+          };
+        };
       };
     };
 }

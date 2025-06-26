@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   userSettings,
   ...
 }:
@@ -47,8 +48,8 @@
 
   xdg.enable = true;
 
-  # enable gnome settings
-  gnome_module.enable = true;
+  # gnome settings
+  gnome_module.enable = lib.mkDefault true;
 
   programs.home-manager.enable = true;
   programs.gpg.enable = true;

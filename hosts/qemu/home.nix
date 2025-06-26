@@ -1,10 +1,11 @@
-{pkgs,...}:
+{ pkgs, lib, ... }:
 
 {
-	imports = [
-	../workstation/home.nix
-];
+  imports = [
+    ../workstation/home.nix
+  ];
 
-	gnome_de.enable = false;
-	hyprland_wm.enable = true;
+  # desktop settings
+  gnome_module.enable = false;
+  hyprland_module.enable = false;
 }

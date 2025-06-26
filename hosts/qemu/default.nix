@@ -37,7 +37,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable GNOME desktop environment.
+  # Desktop settings
   hyprland_wm.enable = true;
 
   # Enable the OpenSSH daemon.
@@ -95,7 +95,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     firefox
-	home-manager
+    home-manager
     spice-vdagent
   ];
 

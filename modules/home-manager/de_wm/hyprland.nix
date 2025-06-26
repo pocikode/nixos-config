@@ -12,14 +12,14 @@ let
 in
 {
   options = {
-    hyperland_module.enable = lib.mkOption {
+    hyprland_module.enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
       description = "Enable Hyprland desktop environment configuration.";
     };
   };
 
-  config = lib.mkIf config.hyperland_module.enable {
+  config = lib.mkIf config.hyprland_module.enable {
     home.packages = with pkgs; [
       waybar
       eww
@@ -41,7 +41,11 @@ in
         "$mainMod" = "SUPER";
         "$menu" = "fuzzel";
         "$terminal" = "kitty";
-        monitor = ",1920x1080@60,auto,1";
+        monitor = [
+          ",prefered,auto,1"
+          "eDP-1,preferred,auto-left,1"
+          "HDMI-A-1,highrr,auto-right,1"
+        ];
 
         env = [
           "NIXOS_OZONE_WL,1"
@@ -130,6 +134,7 @@ in
           "$mainMod,       B, exec, pkill -SIGUSR2 waybar"
           "$mainMod SHIFT, B, exec, pkill -SIGUSR1 waybar"
           "$mainMod,       L, exec, loginctl lock-session"
+          "$mainMod SHIFT  L, exec, makoctl toggle"
           "$mainMod,       P, exec, hyprpicker -an"
           "$mainMod,       N, exec, swaync-client -t"
           ", Print, exec, grimblast --notify --freeze copysave area"

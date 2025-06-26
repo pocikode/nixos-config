@@ -51,6 +51,8 @@
   # gnome settings
   gnome_module.enable = lib.mkDefault true;
 
+  services.ssh-agent.enable = true;
+
   programs.home-manager.enable = true;
   programs.gpg.enable = true;
 }

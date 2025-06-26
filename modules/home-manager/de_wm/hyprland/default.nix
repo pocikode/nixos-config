@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./gnome.nix
-    ./hyprland
+    ./hyprland.nix
+    ./hyprlock.nix
   ];
 }

@@ -7,5 +7,5 @@
 
   # desktop settings
   gnome_module.enable = false;
-  hyprland_module.enable = false;
+  hyprland_module.enable = true;
 }

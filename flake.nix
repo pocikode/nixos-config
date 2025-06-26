@@ -94,6 +94,16 @@
           ];
         };
 
+        legion = nixpkgs.lib.nixosSystem {
+          specialArgs = inputs // {
+            inherit systemSettings userSettings;
+          };
+          modules = [
+            ./hosts/legion
+            ./modules/nixos
+          ];
+        };
+
         vbox = nixpkgs.lib.nixosSystem {
           specialArgs = inputs // {
             inherit systemSettings userSettings;
@@ -121,6 +131,18 @@
           modules = [
             inputs.nvf.homeManagerModules.default
             ./hosts/workstation/home.nix
+            ./modules/home-manager
+          ];
+          extraSpecialArgs = {
+            inherit inputs systemSettings userSettings;
+          };
+        };
+
+        legion = inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            inputs.nvf.homeManagerModules.default
+            ./hosts/legion/home.nix
             ./modules/home-manager
           ];
           extraSpecialArgs = {

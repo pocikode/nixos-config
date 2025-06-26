@@ -65,9 +65,9 @@
         font_size = 90;
         font_family = "$font";
 
-        position = "-30, 0";
-        halign = "right";
-        valign = "top";
+        position = "0, 150";
+        halign = "center";
+        valign = "center";
       }
       # DATE
       {
@@ -76,17 +76,7 @@
         font_size = 25;
         font_family = "$font";
 
-        position = "-30, -150";
-        halign = "right";
-        valign = "top";
-      }
-      {
-        monitor = "";
-        text = "$LAYOUT[en,ru]";
-        font_size = 24;
-        onclick = "hyprctl switchxkblayout all next";
-
-        position = "250, -20";
+        position = "0, 80";
         halign = "center";
         valign = "center";
       }

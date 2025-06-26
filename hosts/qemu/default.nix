@@ -87,9 +87,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Fonts
-  fonts.packages = import ../../modules/shared/fonts.nix { inherit pkgs; };
-
   # programs.firefox.enable = true;
 
   # List packages installed in system profile.
@@ -98,6 +95,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     firefox
+	home-manager
     spice-vdagent
   ];
 

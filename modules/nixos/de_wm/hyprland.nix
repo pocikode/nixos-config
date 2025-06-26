@@ -3,9 +3,8 @@
   lib,
   pkgs,
   userSettings,
-  inputs,
   ...
-}:
+}@inputs:
 
 {
   options = {

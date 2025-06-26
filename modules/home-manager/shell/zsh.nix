@@ -53,6 +53,12 @@
 
         # direnv
         eval "$(direnv hook zsh)"
+
+        # custom env
+        MY_ENV_FILE="~/.my-env"
+        if [ -f "$MY_ENV_FILE" ]; then
+          source "$MY_ENV_FILE"
+        fi
       '';
     };
   };

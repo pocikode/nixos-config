@@ -16,6 +16,7 @@
 
   home.packages = with pkgs; [
     # Common
+    bitwarden-cli
     bitwarden-desktop
     firefox-devedition
     spotify-player
@@ -33,6 +34,7 @@
     postman
 
     # Utilities
+    jq
     nixfmt-rfc-style
   ];
 

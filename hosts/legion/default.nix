@@ -19,5 +19,5 @@
     ../base/configuration.nix
   ];
 
-  gnome_de.enable = true;
+  hyprland_wm.enable = true;
 }

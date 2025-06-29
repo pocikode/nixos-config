@@ -57,6 +57,9 @@
       # Scroll through existing workspaces with mainMod + scroll
       "$mainMod, mouse_down, workspace, e+1"
       "$mainMod, mouse_up, workspace, e-1"
+
+      ", PRINT, exec, grimblast --notify --freeze copysave area"
+      "$mainMod, PRINT, exec, grimblast --notify --freeze copysave active"
     ];
 
     # Move/resize windows with mainMod + LMB/RMB and dragging

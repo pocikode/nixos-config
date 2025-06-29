@@ -12,12 +12,13 @@ let
 in
 {
   home.packages = with pkgs; [
-    rofi-wayland
     avizo
     bc
     brightnessctl
     cliphist
+    fuzzel
     hyprcursor
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
     kdePackages.qtwayland
     kitty
     libnotify
@@ -27,7 +28,7 @@ in
     notify-desktop
     overskride
     playerctl
-    fuzzel
+    rofi-wayland
     waybar
     wl-clipboard
   ];

@@ -51,11 +51,6 @@
     #   recursive = true;
     #   executable = true;
     # };
-
-    ".scripts/brightness.sh" = {
-      source = ../../modules/home-manager/scripts/brightness.sh;
-      executable = true;
-    };
   };
 
   home.sessionVariables = { };

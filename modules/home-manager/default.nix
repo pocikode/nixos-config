@@ -9,10 +9,11 @@
 
 {
   imports = [
-    ./style/stylix.nix
-    ./shell
-    ./fonts.nix
     ./cli-apps.nix
+    ./fonts.nix
     ./gui-apps.nix
+    ./scripts
+    ./shell
+    ./style/stylix.nix
   ];
 }

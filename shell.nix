@@ -11,6 +11,7 @@ pkgs.mkShellNoCC {
     cowsay
     lolcat
     zsh
+    nixd
     nixfmt-rfc-style
   ];
 
@@ -18,7 +19,5 @@ pkgs.mkShellNoCC {
 
   shellHook = ''
     echo $GREETING | cowsay | lolcat
-    export SHELL=$(which zsh)
-    exec $SHELL -i
   '';
 }

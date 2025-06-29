@@ -13,7 +13,7 @@
       "$mainMod, C, killactive,"
       "$mainMod, M, exit,"
       "$mainMod, E, exec, $fileManager"
-      "$mainMod, V, togglefloating,"
+      "$mainMod, F, togglefloating,"
       "$mainMod, R, exec, $menu"
       "$mainMod, P, pseudo," # dwindle
       "$mainMod, J, togglesplit," # dwindle
@@ -73,6 +73,8 @@
       ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
       ",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
       ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
+      # ",XF86MonBrightnessUp, exec, ~/.scripts/brightness.sh inc"
+      # ",XF86MonBrightnessDown, exec, ~/.scripts/brightness.sh dec"
     ];
 
     # Requires playerctl

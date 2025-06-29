@@ -12,6 +12,9 @@ let
 in
 {
   home.packages = with pkgs; [
+    rofi-wayland
+    avizo
+    bc
     brightnessctl
     cliphist
     hyprcursor
@@ -19,7 +22,7 @@ in
     kitty
     libnotify
     mako
-    nemo-with-extensions
+    nautilus
     networkmanagerapplet
     notify-desktop
     overskride
@@ -46,11 +49,12 @@ in
       # Programs
       "$terminal" = "kitty";
       # "$fileManager" = "$terminal -e sh -c ranger";
-      "$fileManager" = "nemo";
+      "$fileManager" = "nautilus";
       "$menu" = "fuzzel --show drun";
 
       # autostart
       exec-once = [
+        "avizo-service"
         "systemctl --user start hyprpolkitagent"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"

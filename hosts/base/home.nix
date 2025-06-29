@@ -42,6 +42,17 @@
   home.file = {
     "container-services/compose.yaml".source =
       ../../modules/home-manager/container/compose.services.yaml;
+
+    # ".scripts" = {
+    #   source = ../../modules/home-manager/scripts;
+    #   recursive = true;
+    #   executable = true;
+    # };
+
+    ".scripts/brightness.sh" = {
+      source = ../../modules/home-manager/scripts/brightness.sh;
+      executable = true;
+    };
   };
 
   home.sessionVariables = { };

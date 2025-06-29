@@ -6,11 +6,11 @@
 
   stylix.fonts = {
     monospace = {
-      name = "Agave Nerd Font Mono";
+      name = "Agave Nerd Font";
       package = pkgs.nerd-fonts.agave;
     };
     sizes = {
-      terminal = 11;
+      terminal = 12;
       applications = 11;
       popups = 11;
       desktop = 11;
@@ -18,6 +18,4 @@
   };
 
   stylix.targets.vscode.enable = false;
-
-  stylix.targets.kitty.enable = true;
 }

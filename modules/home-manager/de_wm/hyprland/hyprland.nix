@@ -12,13 +12,14 @@ let
 in
 {
   home.packages = with pkgs; [
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+
     avizo
     bc
     brightnessctl
     cliphist
     fuzzel
     hyprcursor
-    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
     kdePackages.qtwayland
     kitty
     libnotify

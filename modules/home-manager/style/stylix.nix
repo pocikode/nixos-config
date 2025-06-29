@@ -9,6 +9,10 @@
       name = "Agave Nerd Font";
       package = pkgs.nerd-fonts.agave;
     };
+    emoji = {
+      package = pkgs.noto-fonts-emoji;
+      name = "Noto Color Emoji";
+    };
     sizes = {
       terminal = 12;
       applications = 11;

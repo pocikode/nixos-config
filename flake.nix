@@ -25,6 +25,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     python38.url = "github:nixos/nixpkgs/83162ab3b97d0e13b08e28938133381a7515c1e3";
     go_1_19.url = "github:nixos/nixpkgs/160b762eda6d139ac10ae081f8f78d640dd523eb";
     go_1_22.url = "github:nixos/nixpkgs/9a9dae8f6319600fa9aebde37f340975cab4b8c0";
@@ -88,6 +93,35 @@
     in
     {
       devShells = forSystems devshell;
+      packages.${system}.default = pkgs.stdenvNoCC.mkDerivation {
+        name = "my-shell";
+        src = ./.;
+
+        nativeBuildInputs = [
+          pkgs.wrapGAppsHook
+          pkgs.gobject-introspection
+          pkgs.esbuild
+        ];
+
+        buildInputs = [
+          pkgs.gjs
+          pkgs.glib
+          pkgs.gtk4
+          inputs.astal.packages.${system}.io
+          inputs.astal.packages.${system}.astal4
+        ];
+
+        installPhase = ''
+          mkdir -p $out/bin
+
+          esbuild \
+            --bundle src/app.js \
+            --outfile=$out/bin/my-shell \
+            --format=esm \
+            --sourcemap=inline \
+            --external:gi://\*
+        '';
+      };
 
       nixosConfigurations = {
         default = nixpkgs.lib.nixosSystem {

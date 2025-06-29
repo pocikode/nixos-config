@@ -3,6 +3,7 @@
   pkgs,
   lib,
   userSettings,
+  inputs,
   ...
 }:
 
@@ -16,6 +17,8 @@
   imports = [ ];
 
   home.packages = with pkgs; [
+    inputs.astal.packages.${system}.default
+
     # Common
     bitwarden-cli
     bitwarden-desktop

@@ -56,7 +56,7 @@
         username = "agus";
         name = "Agus Supriyatna";
         email = "aguzsupriyatna7@gmail.com";
-        theme = "dracula";
+        theme = "nord";
         useGnome = true;
         usePlasma = false;
         useHyprland = false;

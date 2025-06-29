@@ -2,10 +2,7 @@
 
 {
   imports = [
-    ../workstation/home.nix
+    ../base/home.nix
+    ../../modules/home-manager/de_wm/hyprland
   ];
-
-  # desktop settings
-  gnome_module.enable = false;
-  hyprland_module.enable = true;
 }

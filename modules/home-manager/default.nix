@@ -9,6 +9,7 @@
 
 {
   imports = [
+    ./style/stylix.nix
     ./shell
     ./fonts.nix
     ./cli-apps.nix

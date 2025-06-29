@@ -9,16 +9,7 @@
     enable = true;
     themeFile = "Catppuccin-Macchiato";
 
-    font = {
-      name = "Agave Nerd Font";
-      size = 11.0;
-      package = pkgs.nerd-fonts.agave;
-    };
-
     settings = {
-      font_family = "Agave Nerd Font";
-      font_size = 11.0;
-
       scrollback_lines = 8000;
       paste_actions = "quote-urls-at-prompt";
       strip_trailing_spaces = "never";

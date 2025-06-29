@@ -20,6 +20,11 @@
       inputs.nixpkgs.follows = "hyprland";
     };
 
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     python38.url = "github:nixos/nixpkgs/83162ab3b97d0e13b08e28938133381a7515c1e3";
     go_1_19.url = "github:nixos/nixpkgs/160b762eda6d139ac10ae081f8f78d640dd523eb";
     go_1_22.url = "github:nixos/nixpkgs/9a9dae8f6319600fa9aebde37f340975cab4b8c0";
@@ -51,6 +56,7 @@
         username = "agus";
         name = "Agus Supriyatna";
         email = "aguzsupriyatna7@gmail.com";
+        theme = "dracula";
         useGnome = true;
         usePlasma = false;
         useHyprland = false;
@@ -99,6 +105,7 @@
             inherit systemSettings userSettings;
           };
           modules = [
+            inputs.stylix.nixosModules.stylix
             ./hosts/legion
             ./modules/nixos
           ];
@@ -141,6 +148,7 @@
         legion = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            inputs.stylix.homeModules.stylix
             inputs.nvf.homeManagerModules.default
             ./hosts/legion/home.nix
             ./modules/home-manager

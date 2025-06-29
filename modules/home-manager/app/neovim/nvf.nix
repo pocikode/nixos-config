@@ -25,11 +25,11 @@
             enable = true;
             formatOnSave = true;
           };
-          theme = {
-            enable = true;
-            name = "catppuccin";
-            style = "macchiato";
-          };
+          # theme = {
+          #   enable = true;
+          #   name = "catppuccin";
+          #   style = "macchiato";
+          # };
 
           keymaps = [
             {

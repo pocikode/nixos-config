@@ -4,6 +4,12 @@
   stylix.enable = true;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${userSettings.theme}.yaml";
 
+  # stylix.image = pkgs.fetchurl {
+  #   url = "https://www.pixelstalk.net/wp-content/uploads/images6/The-best-Daredevil-Wallpaper-HD.jpg";
+  #   hash = "sha256-xiWMNAh2jkgLboP+HZCD1/lvmtpKqyknF1ieU18IA9g=";
+  # };
+  stylix.image = ../wallpapers/daredevil1.jpg;
+
   stylix.fonts = {
     monospace = {
       name = "Agave Nerd Font";

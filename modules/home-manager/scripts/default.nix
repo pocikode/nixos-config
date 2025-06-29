@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 
 {
   home.file = {
@@ -11,5 +11,7 @@
       source = ./fetch_music_player_data.sh;
       executable = true;
     };
+
+    ".config/avizo/config.ini".source = ../utilities/avizo.ini;
   };
 }

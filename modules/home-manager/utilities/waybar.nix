@@ -49,12 +49,26 @@
             "8" = "󰲮";
             "9" = "󰲰";
             "10" = "󰿬";
+            "11" = "󰲠";
+            "12" = "󰲢";
+            "13" = "󰲤";
+            "14" = "󰲦";
+            "15" = "󰲨";
+            "16" = "󰲪";
+            "17" = "󰲬";
+            "18" = "󰲮";
+            "19" = "󰲰";
+            "20" = "󰿬";
+            "urgent" = "";
+            "active" = ""; # focused workspace on current monitor
+            "visible" = ""; # focused workspace on other monitors
             "special" = "";
           };
           "show-special" = true;
           "persistent-workspaces" = {
             "*" = 10;
           };
+          "all-outputs" = false;
         };
 
         "hyprland/submap" = {

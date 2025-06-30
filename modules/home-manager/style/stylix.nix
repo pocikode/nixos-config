@@ -11,6 +11,14 @@
   stylix.image = ../wallpapers/daredevil1.jpg;
 
   stylix.fonts = {
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+    sansSerif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
+    };
     monospace = {
       name = "Agave Nerd Font";
       package = pkgs.nerd-fonts.agave;

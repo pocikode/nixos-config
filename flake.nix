@@ -20,13 +20,18 @@
       inputs.nixpkgs.follows = "hyprland";
     };
 
-    stylix = {
-      url = "github:danth/stylix";
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
+    };
+
+    stylix = {
+      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -134,6 +139,7 @@
             inherit systemSettings userSettings;
           };
           modules = [
+            inputs.stylix.nixosModules.stylix
             ./hosts/workstation
             ./modules/nixos
           ];
@@ -175,6 +181,7 @@
         default = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            inputs.stylix.homeModules.stylix
             inputs.nvf.homeManagerModules.default
             ./hosts/workstation/home.nix
             ./modules/home-manager

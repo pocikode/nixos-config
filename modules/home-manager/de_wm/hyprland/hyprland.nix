@@ -8,7 +8,7 @@
 
 let
   hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  plugins = inputs.hyprland-plugins.packages.${pkgs.system};
+  hyprlandPlugins = inputs.hyprland-plugins.packages.${pkgs.system};
 in
 {
   home.packages = with pkgs; [
@@ -21,6 +21,8 @@ in
     dunst
     fuzzel
     hyprcursor
+    hyprsome
+    kdePackages.kcharselect
     kdePackages.qtwayland
     kitty
     libnotify
@@ -44,9 +46,17 @@ in
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
+    plugins = [
+      # hyprlandPlugins.hyprpm
+      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+    ];
+
     systemd.enable = true;
     settings = {
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        "eDP-1,preferred,auto,auto"
+        "HDMI-A-1,prefered,auto,auto"
+      ];
 
       # Programs
       "$terminal" = "kitty";
@@ -57,6 +67,7 @@ in
       # autostart
       exec-once = [
         "avizo-service"
+        "hyprpm reload -n"
         "systemctl --user start hyprpolkitagent"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
@@ -186,13 +197,14 @@ in
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
-          natural_scroll = false;
+          natural_scroll = true;
+          drag_lock = 0;
         };
       };
 
       # https://wiki.hypr.land/Configuring/Variables/#gestures
       gestures = {
-        workspace_swipe = false;
+        workspace_swipe = true;
       };
 
       ##############################
@@ -201,6 +213,11 @@ in
 
       # See https://wiki.hypr.land/Configuring/Window-Rules/ for more
       # See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
+
+      workspace = [
+        "eDP-1,1"
+        "HDMI-A-1,11"
+      ];
 
       # Example windowrule
       # windowrule = float,class:^(kitty)$,title:^(kitty)$

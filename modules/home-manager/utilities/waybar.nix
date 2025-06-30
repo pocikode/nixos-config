@@ -206,6 +206,7 @@
           # format-ethernet = "{ifname}: {ipaddr}/{cidr}   up: {bandwidthUpBits} down: {bandwidthDownBits}";
           # format-linked = "{ifname} (No IP) ";
           # format-wifi = "{essid} ({signalStrength}%) ";
+          interface = "wlp0s20f3";
           "format" = "󰤭";
           "format-wifi" = "{icon} ({signalStrength}%){essid}";
           "format-icons" = [

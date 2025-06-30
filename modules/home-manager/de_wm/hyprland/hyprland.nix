@@ -22,6 +22,7 @@ in
     fuzzel
     hyprcursor
     hyprsome
+    kdePackages.kate
     kdePackages.kcharselect
     kdePackages.qtwayland
     kitty

@@ -87,8 +87,10 @@
   environment.systemPackages = with pkgs; [
     btop
     evillimiter
+    file
     git
     home-manager
+    jdk
     openvpn
     tree
     unzip

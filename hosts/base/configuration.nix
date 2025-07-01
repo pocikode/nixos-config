@@ -90,7 +90,6 @@
     file
     git
     home-manager
-    jdk
     openvpn
     tree
     unzip

@@ -14,7 +14,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  imports = [ ];
+  imports = [
+    ../../modules/overlays
+  ];
 
   home.packages = with pkgs; [
     inputs.astal.packages.${system}.default
@@ -30,10 +32,12 @@
     bat
     kitty
     oh-my-zsh
+    zsh-autosuggestions
     zsh-completions
 
     # Development
     dbeaver-bin
+    dbgate
     jetbrains-toolbox
     postman
 
@@ -61,4 +65,5 @@
 
   programs.home-manager.enable = true;
   programs.gpg.enable = true;
+  programs.java.enable = true;
 }

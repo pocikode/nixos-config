@@ -1,4 +1,4 @@
-{ pkgs, userSettings, ... }:
+{ pkgs, lib, userSettings, ... }:
 
 {
   stylix.enable = true;
@@ -8,7 +8,7 @@
   #   url = "https://www.pixelstalk.net/wp-content/uploads/images6/The-best-Daredevil-Wallpaper-HD.jpg";
   #   hash = "sha256-xiWMNAh2jkgLboP+HZCD1/lvmtpKqyknF1ieU18IA9g=";
   # };
-  stylix.image = ../wallpapers/daredevil1.jpg;
+  stylix.image = lib.mkDefault ../wallpapers/daredevil1.jpg;
 
   stylix.fonts = {
     serif = {

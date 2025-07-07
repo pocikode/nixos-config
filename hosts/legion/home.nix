@@ -3,6 +3,6 @@
 {
   imports = [
     ../base/home.nix
-    ../../modules/home-manager/de_wm/hyprland
+    ../../modules/home-manager/display/hypr/sequoia
   ];
 }

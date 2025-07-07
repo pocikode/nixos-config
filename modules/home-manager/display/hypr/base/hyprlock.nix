@@ -23,7 +23,7 @@
     background = {
       monitor = "";
       path = lib.mkDefault "screenshot";
-      blur_passes = 3;
+      blur_passes = lib.mkDefault 3;
     };
 
     input-field = {

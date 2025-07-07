@@ -63,10 +63,12 @@ in
       "$terminal" = "kitty";
       # "$fileManager" = "$terminal -e sh -c ranger";
       "$fileManager" = "nautilus";
-      "$menu" = "fuzzel --show drun";
+      "$menu" = lib.mkDefault "fuzzel --show drun";
 
       # autostart
       exec-once = [
+        "mako"
+        "hypridle"
         "avizo-service"
         "hyprpm reload -n"
         "systemctl --user start hyprpolkitagent"
@@ -95,9 +97,9 @@ in
 
       # https://wiki.hypr.land/Configuring/Variables/#general
       general = {
-        gaps_in = 5;
-        gaps_out = 10;
-        border_size = 1;
+        gaps_in = lib.mkDefault 5;
+        gaps_out = lib.mkDefault 10;
+        border_size = lib.mkDefault 1;
 
         # https://wiki.hypr.land/Configuring/Variables/#variable-types for info about colors
         "col.active_border" = lib.mkDefault "rgba(33ccffee) rgba(00ff99ee) 45deg";
@@ -114,36 +116,36 @@ in
 
       # https://wiki.hypr.land/Configuring/Variables/#decoration
       decoration = {
-        rounding = 10;
-        rounding_power = 2;
+        rounding = lib.mkDefault 10;
+        rounding_power = lib.mkDefault 2;
 
         # Change transparency of focused and unfocused windows
-        active_opacity = 1.0;
-        inactive_opacity = 1.0;
+        active_opacity = lib.mkDefault 1.0;
+        inactive_opacity = lib.mkDefault 1.0;
 
         shadow = {
-          enabled = true;
-          range = 4;
-          render_power = 3;
+          enabled = lib.mkDefault true;
+          range = lib.mkDefault 4;
+          render_power = lib.mkDefault 3;
           color = lib.mkDefault "rgba(1a1a1aee)";
         };
 
         # https://wiki.hypr.land/Configuring/Variables/#blur
         blur = {
-          enabled = true;
-          size = 3;
-          passes = 1;
-          vibrancy = 0.1696;
+          enabled = lib.mkDefault true;
+          size = lib.mkDefault 3;
+          passes = lib.mkDefault 1;
+          vibrancy = lib.mkDefault 0.1696;
         };
       };
 
       # https://wiki.hypr.land/Configuring/Variables/#animations
       animations = {
-        enabled = "yes, please :)";
+        enabled = lib.mkDefault "yes, please :)";
 
         # Default animations, see https://wiki.hypr.land/Configuring/Animations/ for more
 
-        bezier = [
+        bezier = lib.mkDefault [
           "easeOutQuint,0.23,1,0.32,1"
           "easeInOutCubic,0.65,0.05,0.36,1"
           "linear,0,0,1,1"
@@ -151,7 +153,7 @@ in
           "quick,0.15,0,0.1,1"
         ];
 
-        animation = [
+        animation = lib.mkDefault [
           "global, 1, 10, default"
           "border, 1, 5.39, easeOutQuint"
           "windows, 1, 4.79, easeOutQuint"

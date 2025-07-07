@@ -1,8 +1,13 @@
-{ pkgs, lib, userSettings, ... }:
+{
+  pkgs,
+  lib,
+  userSettings,
+  ...
+}:
 
 {
   stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${userSettings.theme}.yaml";
+  stylix.base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/${userSettings.theme}.yaml";
 
   # stylix.image = pkgs.fetchurl {
   #   url = "https://www.pixelstalk.net/wp-content/uploads/images6/The-best-Daredevil-Wallpaper-HD.jpg";

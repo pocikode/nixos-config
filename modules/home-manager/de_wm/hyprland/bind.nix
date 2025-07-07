@@ -82,8 +82,13 @@
 
     # Move/resize windows with mainMod + LMB/RMB and dragging
     bindm = [
+      # mouse
       "$mainMod, mouse:272, movewindow"
       "$mainMod, mouse:273, resizewindow"
+
+      # touchpad
+      "$mainMod, Control_L, movewindow"
+      "$mainMod, ALT_L, resizewindow"
     ];
 
     # Laptop multimedia keys for volume and LCD brightness

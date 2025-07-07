@@ -179,6 +179,21 @@
       color: @teal;
     }
 
+    #battery {
+      background-color: alpha(@surface1, 0.7);
+      border-radius: 15;
+      padding-left: 15;
+      padding-right: 15;
+      margin-left: 2;
+      margin-right: 2;
+      margin-top: 5;
+      margin-bottom: 5;
+      color: @sapphire;
+    }
+    #battery.charging {
+      color: @sky;
+    }
+
     #idle_inhibitor {
       margin-right: 2;
     }

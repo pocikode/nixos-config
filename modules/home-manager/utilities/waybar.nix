@@ -31,6 +31,7 @@
         modules-right = [
           "bluetooth"
           "network"
+          "battery"
           "group/misc"
           "custom/logout_menu"
         ];
@@ -224,6 +225,23 @@
           "max-length" = 35;
           "on-click" = "fish -c wifi_toggle";
           "on-click-right" = "iwgtk";
+        };
+
+        battery = {
+          format = "{icon}  {capacity}%";
+          "format-charging" = " {capacity}%";
+          "format-plugged" = " {capacity}%";
+          "states" = {
+            "warning" = 20;
+            "critical" = 10;
+          };
+          "format-icons" = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
 
         "custom/media" = {

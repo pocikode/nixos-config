@@ -7,6 +7,11 @@
 
   programs.kitty = lib.mkForce {
     enable = true;
+
+    keybindings = {
+      "ctrl+k" = "clear_terminal scrollback active : send_text normal \x0c";
+    };
+
     settings = {
       scrollback_lines = 8000;
       paste_actions = "quote-urls-at-prompt";

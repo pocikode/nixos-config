@@ -3,7 +3,8 @@
 {
   imports = [
     ../base/home.nix
-    ../../modules/home-manager/de_wm/hyprland
+    ../../modules/home-manager/display/hypr/xnm1
+    # ../../modules/home-manager/display/hypr/sequoia
   ];
 
   home.packages = with pkgs; [

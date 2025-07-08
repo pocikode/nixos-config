@@ -32,33 +32,38 @@
         ];
         "hyprland/workspaces" = {
           "disable-scroll" = false;
-          "all-outputs" = true;
+          "all-outputs" = false;
           "format" = "{icon}";
           "on-click" = "activate";
+          "show-special" = true;
           "persistent-workspaces" = {
-            "*" = [
-              1
-              2
-              3
-              4
-              5
-              6
-              7
-              8
-              9
-            ];
+            "*" = 10;
           };
           "format-icons" = {
-            "1" = "󰣇";
-            "2" = "󰈹";
-            "3" = "󰇮";
-            "4" = "";
-            "5" = "";
-            "6" = "";
-            "7" = "";
-            "8" = "";
-            "9" = "󰖳";
-            "default" = "";
+            "1" = "󰲠";
+            "2" = "󰲢";
+            "3" = "󰲤";
+            "4" = "󰲦";
+            "5" = "󰲨";
+            "6" = "󰲪";
+            "7" = "󰲬";
+            "8" = "󰲮";
+            "9" = "󰲰";
+            "10" = "󰿬";
+            "11" = "󰲠";
+            "12" = "󰲢";
+            "13" = "󰲤";
+            "14" = "󰲦";
+            "15" = "󰲨";
+            "16" = "󰲪";
+            "17" = "󰲬";
+            "18" = "󰲮";
+            "19" = "󰲰";
+            "20" = "󰿬";
+            "urgent" = "";
+            "active" = ""; # focused workspace on current monitor
+            "visible" = ""; # focused workspace on other monitors
+            "special" = "";
           };
         };
         "custom/lock" = {
@@ -89,7 +94,7 @@
         };
         "network" = {
           "format-wifi" = "<span color='#00FFFF'> 󰤨 </span>{essid} ";
-          "format-ethernet" = "<span color='#7FFF00'> </span>Wired ";
+          "format-ethernet" = "<span color='#7FFF00'>   </span>Wired ";
           "tooltip-format" =
             "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}";
           "format-linked" = "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ";
@@ -133,19 +138,19 @@
           "on-click-right" = "pavucontrol -t 3";
           "on-click" = "pactl -- set-sink-mute 0 toggle";
           "tooltip" = true;
-          "tooltip-format" = "当前系统声音: {volume}%";
+          "tooltip-format" = "Volume: {volume}%";
         };
         "custom/temperature" = {
           "exec" = "sensors | awk '/^Package id 0:/ {print int($4)}'";
           "format" = "<span color='#FFA500'> </span>{}°C ";
           "interval" = 5;
           "tooltip" = true;
-          "tooltip-format" = "当前 CPU 温度: {}°C";
+          "tooltip-format" = "CPU Temperature: {}°C";
         };
         "memory" = {
           "format" = "<span color='#8A2BE2'>  </span>{used:0.1f}G/{total:0.1f}G ";
           "tooltip" = true;
-          "tooltip-format" = "当前内存占比: {used:0.2f}G/{total:0.2f}G";
+          "tooltip-format" = "Memory Usage: {used:0.2f}G/{total:0.2f}G";
         };
         "cpu" = {
           "format" = "<span color='#FF9F0A'>  </span>{usage}% ";
@@ -166,7 +171,7 @@
           "device" = "intel_backlight";
           "format" = "<span color='#FFD700'>{icon}</span>{percent}% ";
           "tooltip" = true;
-          "tooltip-format" = "当前屏幕亮度: {percent}%";
+          "tooltip-format" = "Screen Brightness: {percent}%";
           "format-icons" = [
             "<span color='#696969'> 󰃞 </span>"
             "<span color='#A9A9A9'> 󰃝 </span>"

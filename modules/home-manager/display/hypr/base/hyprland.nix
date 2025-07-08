@@ -31,6 +31,7 @@ in
     networkmanagerapplet
     notify-desktop
     overskride
+    pkgs.pavucontrol
     playerctl
     rofi-wayland
     waybar

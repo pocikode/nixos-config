@@ -25,6 +25,7 @@
     bitwarden-cli
     bitwarden-desktop
     firefox-devedition
+    kdePackages.ark
     spotify-player
 
     # Terminal, shell and CLI

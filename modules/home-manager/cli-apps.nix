@@ -7,6 +7,5 @@
 
 {
   imports = [
-    ./app/neovim/nvf.nix
   ];
 }

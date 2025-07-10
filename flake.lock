@@ -1254,11 +1254,11 @@
         "pre-commit-hooks": "pre-commit-hooks_3"
       },
       "locked": {
-        "lastModified": 1751996026,
-        "narHash": "sha256-mljeO5rX9VYKHlmDRHuqAqzPFsL5Q2MFDscd1YQYiO8=",
+        "lastModified": 1752141678,
+        "narHash": "sha256-zO9LwCkiJheH9ysa6e1Bu8+B2hJAUpnJ0POJaKLVEiE=",
         "owner": "pocikode",
         "repo": "nixvim-config",
-        "rev": "24c3db99abe04407e5eb6060c61aaadce246bf0d",
+        "rev": "7a118884164f49afc46250fa43ce97adb460ce82",
         "type": "github"
       },
       "original": {

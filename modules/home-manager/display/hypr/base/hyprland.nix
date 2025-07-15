@@ -25,7 +25,6 @@ in
     kdePackages.kate
     kdePackages.kcharselect
     kdePackages.qtwayland
-    kitty
     libnotify
     nautilus
     networkmanagerapplet
@@ -61,7 +60,7 @@ in
       ];
 
       # Programs
-      "$terminal" = "kitty";
+      "$terminal" = "alacritty";
       # "$fileManager" = "$terminal -e sh -c ranger";
       "$fileManager" = "nautilus";
       "$menu" = lib.mkDefault "fuzzel --show drun";

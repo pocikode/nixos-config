@@ -28,11 +28,10 @@
     firefox-devedition
     kdePackages.ark
     spotify-player
+    tomato-c
 
     # Terminal, shell and CLI
-    alacritty
     bat
-    kitty
     oh-my-zsh
     zsh-autosuggestions
     zsh-completions
@@ -42,10 +41,17 @@
     dbgate
     jetbrains-toolbox
     postman
+    uv
 
     # Utilities
+    eza
+    fzf
+    fzf-zsh
     jq
+    lazygit
+    nix-prefetch-git
     nixfmt-rfc-style
+    zoxide
   ];
 
   home.file = {

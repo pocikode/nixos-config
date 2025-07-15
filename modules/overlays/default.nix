@@ -2,6 +2,6 @@
 
 {
   nixpkgs.overlays = [
-    (import ./dbeaver.nix)
+    # (import ./dbeaver.nix)
   ];
 }

@@ -31,6 +31,7 @@ in
     overskride
     pkgs.pavucontrol
     playerctl
+    ranger
     rofi-wayland
     waybar
     wl-clipboard
@@ -59,8 +60,7 @@ in
 
       # Programs
       "$terminal" = "alacritty";
-      # "$fileManager" = "$terminal -e sh -c ranger";
-      "$fileManager" = "nautilus";
+      "$fileManager" = lib.mkDefault "$terminal -e sh -c ranger";
       "$menu" = lib.mkDefault "fuzzel --show drun";
 
       # autostart

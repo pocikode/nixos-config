@@ -6,6 +6,7 @@
     ./hyprland/hyprland.nix
     ./hyprland/hyprlock.nix
     ./waybar/waybar.nix
+    ../../../utilities/file-manager.nix
   ];
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";

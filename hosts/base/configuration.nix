@@ -59,6 +59,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  # Enable automounting of USB drives.
+  services.udisks2.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${userSettings.username} = {
     isNormalUser = true;

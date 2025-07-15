@@ -21,7 +21,6 @@ in
     dunst
     fuzzel
     hyprcursor
-    hyprsome
     kdePackages.kate
     kdePackages.kcharselect
     kdePackages.qtwayland
@@ -48,7 +47,6 @@ in
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     plugins = [
-      # hyprlandPlugins.hyprpm
       inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
     ];
 

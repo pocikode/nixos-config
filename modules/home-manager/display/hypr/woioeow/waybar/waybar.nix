@@ -36,9 +36,9 @@
           "format" = "{icon}";
           "on-click" = "activate";
           "show-special" = true;
-          "persistent-workspaces" = {
-            "*" = 10;
-          };
+          # "persistent-workspaces" = {
+          #   "*" = 10;
+          # };
           "format-icons" = {
             "1" = "󰲠";
             "2" = "󰲢";
@@ -63,7 +63,8 @@
             "urgent" = "";
             "active" = ""; # focused workspace on current monitor
             "visible" = ""; # focused workspace on other monitors
-            "special" = "";
+            "default" = "";
+            "empty" = "";
           };
         };
         "custom/lock" = {

@@ -19,7 +19,6 @@
   ];
 
   home.packages = with pkgs; [
-    inputs.astal.packages.${system}.default
     inputs.nixvim.packages.${system}.default
 
     # Common

@@ -29,7 +29,7 @@ alias uvr="uv run"
 alias uvm="uv run manage.py"
 
 # custom env
-MY_ENV_FILE="~/.my-env"
+MY_ENV_FILE="$HOME/.my-env"
 if [ -f "$MY_ENV_FILE" ]; then
     source "$MY_ENV_FILE"
 fi

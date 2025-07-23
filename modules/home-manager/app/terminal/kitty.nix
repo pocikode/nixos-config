@@ -5,11 +5,18 @@
     kitty
   ];
 
+  home.file.".config/kitty/kittens_script" = {
+    source = ./kittens_script;
+    recursive = true;
+  };
+
   programs.kitty = lib.mkForce {
     enable = true;
 
     keybindings = {
       "ctrl+shift+k" = "clear_terminal scrollback active : send_text normal \x0c";
+      "ctrl+shift+/" =
+        "launch --allow-remote-control kitty +kitten kittens_script/search.py @active-kitty-window-id";
     };
 
     settings = {

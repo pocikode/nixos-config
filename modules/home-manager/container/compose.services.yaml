@@ -13,6 +13,29 @@ services:
     networks:
       - app_network
 
+  mariadb:
+    image: mariadb:11.8.2-noble
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: secret
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    networks:
+      - app_network
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - app_network
+
   redis:
     image: redis:latest
     container_name: redis
@@ -23,6 +46,7 @@ services:
 
 volumes:
   postgres_data:
+  mariadb_data:
 
 networks:
   app_network:

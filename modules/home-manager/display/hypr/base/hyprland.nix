@@ -59,7 +59,7 @@ in
       ];
 
       # Programs
-      "$terminal" = "alacritty";
+      "$terminal" = "kitty";
       "$fileManager" = lib.mkDefault "$terminal -e sh -c ranger";
       "$menu" = lib.mkDefault "fuzzel --show drun";
 

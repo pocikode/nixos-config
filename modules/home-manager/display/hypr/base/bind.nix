@@ -10,6 +10,7 @@
     bind = [
       # Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
       "$mainMod, Q, exec, $terminal"
+      "$mainMod, A, exec, alacritty"
       "$mainMod, C, killactive,"
       "$mainMod, M, exit,"
       "$mainMod, E, exec, $fileManager"

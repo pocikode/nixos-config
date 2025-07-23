@@ -38,6 +38,7 @@
     # Development
     dbeaver-bin
     dbgate
+    devenv
     jetbrains-toolbox
     postman
     uv
@@ -46,6 +47,7 @@
     eza
     fzf
     fzf-zsh
+    google-authenticator
     jq
     lazygit
     nix-prefetch-git

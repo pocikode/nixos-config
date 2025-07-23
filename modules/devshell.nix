@@ -29,6 +29,8 @@ in
       python38.python38Packages.virtualenv
       python38.python38Packages.setuptools
       python38.python38Packages.wheel
+      python38.postgresql
+      python38.openssl
     ];
     shellHook = ''
       echo "Welcome to Python 3.8 development shell!" | cowsay | lolcat

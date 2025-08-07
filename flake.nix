@@ -14,27 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.nixpkgs.follows = "hyprland";
-    };
-
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -71,7 +50,7 @@
         username = "agus";
         name = "Agus Supriyatna";
         email = "aguzsupriyatna7@gmail.com";
-        theme = "catppuccin-macchiato";
+        theme = "catppuccin-mocha";
         useGnome = true;
         usePlasma = false;
         useHyprland = false;
@@ -110,40 +89,19 @@
             inherit systemSettings userSettings;
           };
           modules = [
-            inputs.stylix.nixosModules.stylix
             ./hosts/workstation
             ./modules/nixos
-          ];
-        };
-
-        legion = nixpkgs.lib.nixosSystem {
-          specialArgs = inputs // {
-            inherit systemSettings userSettings;
-          };
-          modules = [
             inputs.stylix.nixosModules.stylix
-            ./hosts/legion
-            ./modules/nixos
-          ];
-        };
+            inputs.home-manager.nixosModules.home-manager
+            {
 
-        vbox = nixpkgs.lib.nixosSystem {
-          specialArgs = inputs // {
-            inherit systemSettings userSettings;
-          };
-          modules = [
-            ./hosts/vbox
-            ./modules/nixos
-          ];
-        };
-
-        qemu = nixpkgs.lib.nixosSystem {
-          specialArgs = inputs // {
-            inherit systemSettings userSettings;
-          };
-          modules = [
-            ./hosts/qemu
-            ./modules/nixos
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."${userSettings.username}" = ./hosts/workstation/home.nix;
+              home-manager.extraSpecialArgs = {
+                inherit inputs systemSettings userSettings;
+              };
+            }
           ];
         };
       };
@@ -153,33 +111,7 @@
           inherit pkgs;
           modules = [
             inputs.stylix.homeModules.stylix
-            inputs.nvf.homeManagerModules.default
             ./hosts/workstation/home.nix
-            ./modules/home-manager
-          ];
-          extraSpecialArgs = {
-            inherit inputs systemSettings userSettings;
-          };
-        };
-
-        legion = inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            inputs.stylix.homeModules.stylix
-            inputs.nvf.homeManagerModules.default
-            ./hosts/legion/home.nix
-            ./modules/home-manager
-          ];
-          extraSpecialArgs = {
-            inherit inputs systemSettings userSettings;
-          };
-        };
-
-        qemu = inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            inputs.nvf.homeManagerModules.default
-            ./hosts/qemu/home.nix
             ./modules/home-manager
           ];
           extraSpecialArgs = {

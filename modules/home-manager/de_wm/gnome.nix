@@ -22,7 +22,7 @@ in
     dconf = {
       enable = true;
       settings = {
-        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/desktop/interface".color-scheme = lib.mkDefault "prefer-dark";
         "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-timeout = 300;
         "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type = "blank";
       };

@@ -33,7 +33,8 @@
   virtualisation_support.enable = lib.mkDefault true;
 
   # Enable docker
-  docker.enable = lib.mkDefault true;
+  # docker.enable = lib.mkDefault true;
+  podman.enable = lib.mkDefault true;
 
   # Enable the OpenSSH daemon.
   openssh.enable = true;
@@ -60,7 +61,7 @@
   services.libinput.enable = true;
 
   # Enable automounting of USB drives.
-  services.udisks2.enable = true;
+  # services.udisks2.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${userSettings.username} = {

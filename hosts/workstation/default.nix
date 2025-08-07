@@ -14,10 +14,9 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../base/configuration.nix
   ];
 
-  hyprland_wm.enable = true;
+  gnome_de.enable = true;
 }

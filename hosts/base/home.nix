@@ -12,10 +12,11 @@
   home.homeDirectory = "/home/${userSettings.username}";
   home.stateVersion = lib.mkDefault "25.11";
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   imports = [
     ../../modules/overlays
+    ../../modules/home-manager
   ];
 
   home.packages = with pkgs; [
@@ -25,7 +26,6 @@
     bitwarden-cli
     bitwarden-desktop
     firefox-devedition
-    kdePackages.ark
     spotify-player
     tomato-c
 
@@ -37,9 +37,7 @@
 
     # Development
     dbeaver-bin
-    dbgate
     devenv
-    jetbrains-toolbox
     postman
     uv
 
@@ -47,7 +45,6 @@
     eza
     fzf
     fzf-zsh
-    google-authenticator
     jq
     lazygit
     nix-prefetch-git
@@ -72,7 +69,7 @@
 
   services.ssh-agent.enable = true;
 
-  programs.home-manager.enable = true;
+  # programs.home-manager.enable = true;
   programs.gpg.enable = true;
   programs.java.enable = true;
 }

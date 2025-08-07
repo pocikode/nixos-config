@@ -3,7 +3,6 @@
 {
   imports = [
     ../base/home.nix
-    ../../modules/home-manager/display/hypr/woioeow
   ];
 
   home.packages = with pkgs; [
@@ -13,4 +12,6 @@
     nmap
     motrix
   ];
+
+  gnome_module.enable = true;
 }

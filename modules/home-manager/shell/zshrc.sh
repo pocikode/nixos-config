@@ -1,3 +1,9 @@
+# powerlevel10k
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # bat
 alias rcat="$(which cat)"
 alias cat="$(which bat)"
@@ -12,14 +18,12 @@ alias ls="eza --icons=always"
 eval "$(zoxide init zsh)"
 alias cd="z"
 
-# history setup
-setopt share_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_verify
-
 # direnv
 eval "$(direnv hook zsh)"
+
+# pay-respects
+eval "$(pay-respects zsh --alias)"
+alias fuck="$(pay-respects zsh)"
 
 # Laravel
 alias art="php artisan"
@@ -33,7 +37,3 @@ MY_ENV_FILE="$HOME/.my-env"
 if [ -f "$MY_ENV_FILE" ]; then
     source "$MY_ENV_FILE"
 fi
-
-# completion using arrow keys (based on history)
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward

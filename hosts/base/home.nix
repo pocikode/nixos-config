@@ -44,11 +44,12 @@
     # Utilities
     eza
     fzf
-    fzf-zsh
     jq
     lazygit
+    nix-index
     nix-prefetch-git
     nixfmt-rfc-style
+    pay-respects
     zoxide
   ];
 

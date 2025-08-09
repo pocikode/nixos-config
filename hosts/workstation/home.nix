@@ -13,5 +13,5 @@
     motrix
   ];
 
-  gnome_module.enable = true;
+  gnome_de.enable = true;
 }

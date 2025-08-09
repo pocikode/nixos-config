@@ -2,6 +2,7 @@
 
 {
   stylix.enable = true;
+  stylix.polarity = "dark";
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${userSettings.theme}.yaml";
 
   stylix.fonts = {

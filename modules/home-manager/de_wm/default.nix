@@ -1,9 +1,0 @@
-{ pkgs, ... }:
-
-{
-  imports = [
-    ./gnome.nix
-    ./plasma.nix
-    # ./hyprland
-  ];
-}

@@ -20,7 +20,7 @@
   ];
 
   home.packages = with pkgs; [
-    inputs.nixvim.packages.${system}.default
+    inputs.nvf.packages.${system}.default
 
     # Common
     bitwarden-cli
@@ -46,10 +46,13 @@
     fzf
     jq
     lazygit
+    nettools
     nix-index
     nix-prefetch-git
     nixfmt-rfc-style
+    nmap
     pay-respects
+    wl-clipboard
     zoxide
   ];
 

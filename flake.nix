@@ -9,8 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:pocikode/nixvim-config";
+    nvf = {
+      url = "github:pocikode/nvf-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

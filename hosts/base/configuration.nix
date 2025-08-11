@@ -17,11 +17,14 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = systemSettings.hostname;
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = systemSettings.hostname;
+    networkmanager.enable = true;
+    hosts = {
+      "0.0.0.0" = [ "apresolve.spotify.com" ];
+    };
+  };
 
   # Set your time zone.
   time.timeZone = systemSettings.timezone;
@@ -112,6 +115,10 @@
       experimental-features = [
         "nix-command"
         "flakes"
+      ];
+      trusted-users = [
+        "${userSettings.username}"
+        "root"
       ];
     };
     package = pkgs.nix;

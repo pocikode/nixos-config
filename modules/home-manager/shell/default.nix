@@ -11,5 +11,6 @@
     ./direnv.nix
     ./zsh.nix
     ./git.nix
+    ./starship.nix
   ];
 }

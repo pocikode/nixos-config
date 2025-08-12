@@ -51,7 +51,6 @@
     nix-prefetch-git
     nixfmt-rfc-style
     nmap
-    pay-respects
     wl-clipboard
     zoxide
   ];

@@ -29,7 +29,7 @@ in
       oh-my-zsh = {
         enable = true;
         custom = "$HOME/${customPath}";
-        theme = "powerlevel10k/powerlevel10k";
+        theme = "";
         plugins = [
           "git"
           "fzf-tab"
@@ -37,13 +37,6 @@ in
           "you-should-use"
         ];
       };
-    };
-
-    home.file.".p10k.zsh".source = ./p10k.zsh;
-
-    home.file."${customPath}/themes/powerlevel10k".source = builtins.fetchGit {
-      url = "https://github.com/romkatv/powerlevel10k.git";
-      rev = "35833ea15f14b71dbcebc7e54c104d8d56ca5268";
     };
 
     home.file."${customPath}/plugins/fzf-tab".source = builtins.fetchGit {

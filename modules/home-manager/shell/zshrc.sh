@@ -5,8 +5,10 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 
 # eza
-alias rls="eza"
-alias ls="eza --icons=always"
+alias ls='eza -lh --group-directories-first --icons --hyperlink'
+alias lsa='ls -a'
+alias lt='eza --tree --level=2 --long --icons --git'
+alias lta='lt -a'
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -14,10 +16,6 @@ alias cd="z"
 
 # direnv
 eval "$(direnv hook zsh)"
-
-# pay-respects
-# eval "$(pay-respects zsh --alias)"
-# alias fuck="$(pay-respects zsh)"
 
 # Laravel
 alias art="php artisan"

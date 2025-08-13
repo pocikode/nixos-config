@@ -13,8 +13,12 @@
 
   stylix.targets.vscode.enable = false;
 
-  # stylix.opacity.applications = 0.95;
-  # stylix.opacity.desktop = 0.95;
-  # stylix.opacity.popups = 0.95;
-  # stylix.opacity.terminal = 0.95;
+  stylix.override = {
+    base08 = "#F7768E";
+    base09 = "#FF9E64";
+    base0A = "#E0AF68";
+    base0B = "#41A6B5";
+    base0D = "#7AA2F7";
+    base0F = "#D18616";
+  };
 }

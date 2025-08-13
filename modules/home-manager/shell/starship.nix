@@ -12,9 +12,9 @@ let
         "$directory"
         "[](bg:green fg:blue)"
         "$git_branch"
-        "[](bg:red fg:green)"
+        "[](bg:brown fg:green)"
         "$git_status"
-        "[](fg:red)"
+        "[](fg:brown)"
         "$fill"
         "[](fg:yellow)"
         "$cmd_duration"
@@ -23,7 +23,12 @@ let
         "[](bg:cyan fg:white)"
         "$time"
         "[▓▒░](fg:white)"
+        "[╶╮ ](fg:white)"
         "\n[╰─](fg:white)$character"
+      ];
+
+      right_format = lib.concatStrings [
+        "[─╯](fg:white)"
       ];
 
       character = {
@@ -51,7 +56,7 @@ let
 
       git_status = {
         style = "bg:git";
-        format = "[[($all_status$ahead_behind )](bg:red fg:black)]($style)";
+        format = "[[($all_status$ahead_behind )](bg:brown fg:black)]($style)";
       };
 
       cmd_duration = {
@@ -72,30 +77,85 @@ let
         time_format = "%H:%I";
       };
     };
+
+    pills = {
+      format = lib.concatStrings [
+        "[╭╴](fg:white)"
+        "$username"
+        "$directory"
+        "$time"
+        "($git_branch$git_status)"
+        "$direnv"
+        "($golang$python)"
+        "$cmd_duration"
+        "\n[╰─](fg:white)$character"
+      ];
+
+      username = {
+        disabled = false;
+        show_always = true;
+        format = "[](blue)[  $user](bg:blue fg:black)[](blue)";
+      };
+
+      directory = {
+        truncation_length = 3;
+        truncation_symbol = "…/";
+        truncate_to_repo = true;
+        style = "bg:purple fg:black";
+        format = " [](purple)[  $path]($style)[](purple)";
+      };
+
+      time = {
+        disabled = false;
+        time_format = "%H:%I";
+        style = "bg:green fg:black";
+        format = " [](green)[  $time]($style)[](green)";
+      };
+
+      git_branch = {
+        symbol = " ";
+        format = " [](orange)[$symbol$branch](bg:orange fg:black)[](orange)";
+      };
+
+      git_status = {
+        style = "bg:red fg:black";
+        format = " [](red)[$all_status$ahead_behind](bg:red fg:black)[](red)";
+      };
+
+      cmd_duration = {
+        style = "bg:yellow fg:black";
+        format = " [](yellow)[󰔟 $duration]($style)[](yellow)";
+      };
+
+      direnv = {
+        disabled = false;
+        symbol = "󱥿 ";
+        style = "bg:brown fg:black";
+        format = " [](brown)[$symbol$loaded]($style)[](brown)";
+      };
+
+      golang = {
+        symbol = "󰟓 ";
+        style = "bg:cyan fg:black";
+        format = " [](cyan)[$symbol($version)]($style)[](cyan)";
+      };
+
+      python = {
+        symbol = " ";
+        style = "bg:cyan fg:black";
+        format = ''
+          ${" [](cyan)[\${symbol}\${pyenv_prefix}($version )]($style)[](cyan)"}
+        '';
+      };
+    };
   };
 in
 {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    settings = settings.default // {
+    settings = settings.pills // {
       add_newline = true;
-      palette = lib.mkForce "tokyo-night";
-
-      palettes = {
-        tokyo-night = {
-          black = "#24283B";
-          white = "#A9B1D6";
-          red = "#F7768E";
-          orange = "#FF9E64";
-          yellow = "#E0AF68";
-          green = "#41A6B5";
-          cyan = "#7DCFFF";
-          blue = "#7AA2F7";
-          magenta = "#BB9AF7";
-          brown = "#D18616";
-        };
-      };
     };
   };
 }

@@ -109,6 +109,26 @@
             }
           ];
         };
+
+        qemu = nixpkgs.lib.nixosSystem {
+          specialArgs = inputs // {
+            inherit systemSettings userSettings;
+          };
+          modules = [
+            ./hosts/qemu
+            inputs.stylix.nixosModules.stylix
+            inputs.home-manager.nixosModules.home-manager
+            {
+
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."${userSettings.username}" = ./hosts/qemu/home.nix;
+              home-manager.extraSpecialArgs = {
+                inherit inputs systemSettings userSettings;
+              };
+            }
+          ];
+        };
       };
 
       homeConfigurations = {

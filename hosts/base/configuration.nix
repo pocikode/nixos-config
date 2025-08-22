@@ -33,7 +33,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Enable virtualisation support.
-  virtualisation_support.enable = lib.mkDefault true;
+  virtualisation_support.enable = true;
 
   # Enable docker
   # docker.enable = lib.mkDefault true;

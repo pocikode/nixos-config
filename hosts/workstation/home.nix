@@ -11,6 +11,7 @@
     iproute2
     nmap
     motrix
+    quickemu
   ];
 
   gnome_de.enable = true;

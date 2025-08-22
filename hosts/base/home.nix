@@ -20,12 +20,14 @@
   ];
 
   home.packages = with pkgs; [
-    inputs.nvf.packages.${system}.default
+    # inputs.nvf.packages.${system}.default
+    inputs.nixvim.packages.${system}.default
 
     # Common
     bitwarden-cli
     bitwarden-desktop
     firefox-devedition
+    spotify
     spotify-player
     tomato-c
 
@@ -51,6 +53,7 @@
     nix-prefetch-git
     nixfmt-rfc-style
     nmap
+    ripgrep
     wl-clipboard
     zoxide
   ];

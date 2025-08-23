@@ -24,6 +24,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nvchad-starter = {
+      url = "github:pocikode/nvim";
+      flake = false;
+    };
+
+    nix4nvchad = {
+      url = "github:nix-community/nix4nvchad";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nvchad-starter.follows = "nvchad-starter";
+    };
+
     python38.url = "github:nixos/nixpkgs/83162ab3b97d0e13b08e28938133381a7515c1e3";
     go_1_19.url = "github:nixos/nixpkgs/160b762eda6d139ac10ae081f8f78d640dd523eb";
     go_1_22.url = "github:nixos/nixpkgs/9a9dae8f6319600fa9aebde37f340975cab4b8c0";

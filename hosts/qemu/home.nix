@@ -9,6 +9,7 @@
 {
   imports = [
     ../../modules/home-manager/shell
+    ../../modules/home-manager/app/dev/nvchad.nix
   ];
 
   home.username = userSettings.username;

@@ -40,7 +40,7 @@
   podman.enable = lib.mkDefault true;
 
   # Enable the OpenSSH daemon.
-  openssh.enable = true;
+  openssh.enable = false;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

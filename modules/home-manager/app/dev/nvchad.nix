@@ -8,10 +8,20 @@
   programs.nvchad = {
     enable = true;
     extraPackages = with pkgs; [
+      # lsp
+      clang-tools
+      docker-language-server
+      gopls
       lua-language-server
-      stylua
       nil
+      pyright
+      vscode-langservers-extracted
+      yaml-language-server
+
+      # formatters
       nixfmt-rfc-style
+      ruff
+      stylua
     ];
     hm-activation = true;
     backup = true;

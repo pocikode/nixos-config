@@ -9,18 +9,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvf = {
-      url = "github:pocikode/nvf-config";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     stylix = {
       url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "gitlab:pocikode/nixvim-config";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -21,7 +21,7 @@
 
   home.packages = with pkgs; [
     # inputs.nvf.packages.${system}.default
-    inputs.nixvim.packages.${system}.default
+    # inputs.nixvim.packages.${system}.default
 
     # Common
     bitwarden-cli

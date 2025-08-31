@@ -23,6 +23,7 @@ in
       gnomeExtensions.blur-my-shell
       gnomeExtensions.gsconnect
       gnomeExtensions.app-menu-is-back
+      gnomeExtensions.xremap
     ];
 
     dconf = {
@@ -38,6 +39,7 @@ in
             blur-my-shell.extensionUuid
             gsconnect.extensionUuid
             app-menu-is-back.extensionUuid
+            xremap.extensionUuid
           ];
         };
 

@@ -18,5 +18,9 @@
     ../base/configuration.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    libxkbcommon
+  ];
+
   gnome_de.enable = true;
 }

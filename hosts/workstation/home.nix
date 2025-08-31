@@ -11,7 +11,10 @@
     iproute2
     nmap
     motrix
+    pcsx2
     quickemu
+    vlc
+    xremap
   ];
 
   gnome_de.enable = true;
